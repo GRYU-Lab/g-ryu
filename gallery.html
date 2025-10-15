@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="gallery.js"></script>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gallery.html" class="active">Gallery</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="youtube.html">YouTube</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="page-content">
+    <div class="filter-buttons">
+      <button data-filter="all">All</button>
+      <button data-filter="nature">Nature</button>
+      <button data-filter="people">People</button>
+      <button data-filter="architecture">Architecture</button>
+    </div>
+    <div class="gallery">
+      <img src="assets/nature1.jpg" alt="Nature" class="nature">
+      <img src="assets/people1.jpg" alt="People" class="people">
+      <img src="assets/architecture1.jpg" alt="Architecture" class="architecture">
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2025 G.Ryu. All Rights Reserved.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="youtube-page">
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="youtube.html" class="active">YouTube</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="youtube-content">
+    <div class="video-section">
+      <!-- 메인 동영상 -->
+      <div class="youtube-container">
+        <iframe 
+          src="https://www.youtube.com/embed/example" 
+          title="YouTube video" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
+      </div>
+      <!-- 추천 영상 리스트 -->
+      <div class="video-list">
+        <div class="video-item">
+          <img src="images/video-thumbnail-1.jpg" alt="Video 1">
+          <p>Video Title 1</p>
+        </div>
+        <div class="video-item">
+          <img src="images/video-thumbnail-2.jpg" alt="Video 2">
+          <p>Video Title 2</p>
+        </div>
+        <div class="video-item">
+          <img src="images/video-thumbnail-3.jpg" alt="Video 3">
+          <p>Video Title 3</p>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2025 G.Ryu. All Rights Reserved.</p>
+  </footer>
+</body>
+</html>
