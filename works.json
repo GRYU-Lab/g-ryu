@@ -6,6 +6,7 @@
     "year": "2024",
     "image": "images/works/work-001.jpg",
     "saatchi_url": "https://www.saatchiart.com/en-kr/account/artworks/1065821",
+    "artsper_url": "https://www.artsper.com/fr/artistes-contemporains/coree-du-sud/100353/gilbert-ryu",
     "featured": true
   },
   {
@@ -15,6 +16,7 @@
     "year": "2024",
     "image": "images/works/work-002.jpg",
     "saatchi_url": "https://www.saatchiart.com/en-kr/account/artworks/1065821",
+    "artsper_url": "https://www.artsper.com/fr/artistes-contemporains/coree-du-sud/100353/gilbert-ryu",
     "featured": true
   },
   {
@@ -24,6 +26,7 @@
     "year": "2023",
     "image": "images/works/work-003.jpg",
     "saatchi_url": "https://www.saatchiart.com/en-kr/account/artworks/1065821",
+    "artsper_url": "https://www.artsper.com/fr/artistes-contemporains/coree-du-sud/100353/gilbert-ryu",
     "featured": true
   },
   {
@@ -33,7 +36,8 @@
     "year": "2023",
     "image": "images/works/work-004.jpg",
     "saatchi_url": "https://www.saatchiart.com/en-kr/account/artworks/1065821",
-    "featured": false
+    "artsper_url": "https://www.artsper.com/fr/artistes-contemporains/coree-du-sud/100353/gilbert-ryu",
+    "featured": true
   },
   {
     "id": 5,
@@ -42,6 +46,7 @@
     "year": "2022",
     "image": "images/works/work-005.jpg",
     "saatchi_url": "https://www.saatchiart.com/en-kr/account/artworks/1065821",
+    "artsper_url": "https://www.artsper.com/fr/artistes-contemporains/coree-du-sud/100353/gilbert-ryu",
     "featured": false
   },
   {
@@ -51,6 +56,7 @@
     "year": "2022",
     "image": "images/works/work-006.jpg",
     "saatchi_url": "https://www.saatchiart.com/en-kr/account/artworks/1065821",
+    "artsper_url": "https://www.artsper.com/fr/artistes-contemporains/coree-du-sud/100353/gilbert-ryu",
     "featured": false
   }
 ]

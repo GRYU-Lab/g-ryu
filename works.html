@@ -124,7 +124,7 @@
         <p class="u-label" style="margin-bottom:0.8rem">Portfolio</p>
         <h1>Works</h1>
       </div>
-      <p>작품 구매는 Saatchi Art에서 가능합니다</p>
+      <p>작품 구매는 Saatchi Art · Artsper에서 가능합니다</p>
     </div>
 
     <div class="works-filter">
@@ -140,8 +140,11 @@
     </div>
 
     <div class="works-cta">
-      <p>Saatchi Art에서 류화정 작가의 모든 작품을 확인하실 수 있습니다</p>
-      <a href="https://www.saatchiart.com/en-kr/account/artworks/1065821" target="_blank" rel="noopener" class="btn btn-dark">Saatchi Art에서 전체 보기 ↗</a>
+      <p>Saatchi Art · Artsper에서 류화정 작가의 작품을 만나보실 수 있습니다</p>
+      <div style="display:flex;gap:0.7rem;justify-content:center;flex-wrap:wrap">
+        <a href="https://www.saatchiart.com/en-kr/account/artworks/1065821" target="_blank" rel="noopener" class="btn btn-dark">Saatchi Art ↗</a>
+        <a href="https://www.artsper.com/fr/artistes-contemporains/coree-du-sud/100353/gilbert-ryu" target="_blank" rel="noopener" class="btn btn-line">Artsper ↗</a>
+      </div>
     </div>
   </div>
 
@@ -168,6 +171,12 @@
         var img = w.image
           ? '<img src="' + w.image + '" alt="' + w.title + ' — 류화정 G.Ryu" draggable="false">'
           : '<span class="work-placeholder-text">작품 이미지</span>';
+        /* saatchi_url 또는 artsper_url 지원 */
+        var buyUrl   = w.saatchi_url || w.artsper_url || '';
+        var buyLabel = w.artsper_url && !w.saatchi_url ? 'Artsper ↗' : '구매 ↗';
+        var buyBtn   = buyUrl
+          ? '<a href="' + buyUrl + '" target="_blank" rel="noopener" class="work-card-link">' + buyLabel + '</a>'
+          : '';
         return '<div class="work-card no-select" data-category="' + w.medium + '">'
           + '<div class="work-card-img" style="position:relative">'
           + img
@@ -178,7 +187,7 @@
           + '<h2 class="work-card-title">' + w.title + '</h2>'
           + '<div class="work-card-meta">'
           + '<span class="work-card-medium">' + w.medium + ' · ' + w.year + '</span>'
-          + '<a href="' + w.saatchi_url + '" target="_blank" rel="noopener" class="work-card-link">구매 ↗</a>'
+          + buyBtn
           + '</div></div></div>';
       }).join('');
     }

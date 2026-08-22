@@ -213,8 +213,20 @@
           if (!cv[key] || !cv[key].length) return;
           html += '<div class="cv-block" id="' + key + '">'
             + '<h2 class="cv-block-title">' + sections[key].label + '</h2>'
-            + cv[key].map(cvItem).join('')
-            + '</div>';
+            + cv[key].map(cvItem).join('');
+
+          /* online 섹션에 Artsper 항목 추가 */
+          if (key === 'online') {
+            html += '<div class="cv-item">'
+              + '<span class="cv-year">현재</span>'
+              + '<div class="cv-content">'
+              + '<span class="cv-title">Artsper</span>'
+              + '<span class="cv-venue">Gilbert Ryu — 작품 활성화 준비 중</span>'
+              + '<a href="https://www.artsper.com/fr/artistes-contemporains/coree-du-sud/100353/gilbert-ryu" target="_blank" rel="noopener" class="cv-tag">페이지 보기 ↗</a>'
+              + '</div></div>';
+          }
+
+          html += '</div>';
         });
         document.getElementById('cvBody').innerHTML = html;
       })
