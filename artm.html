@@ -187,29 +187,32 @@
         <h2>ART:M 오픈 소식을<br>가장 먼저 받아보세요</h2>
         <p>전시 일정, 플랫폼 오픈 안내, 작가 노트를 이메일로 전달해드립니다. 스팸은 보내지 않습니다.</p>
 
-        <form class="subscribe-form" id="subscribeForm" onsubmit="handleSubmit(event)">
+        <!-- Brevo 구독 폼 -->
+        <form class="subscribe-form" id="subscribeForm" method="POST"
+          action="https://553a93a7.sibforms.com/serve/MUIFAORLOdgYOZfJnC3EdQ81DawEPkdp3PvrlV1CCwOTi5P4619ZatxN2MiFgZKQqJdH1e4bZc3eyBeKJiZACNstTVJrabqU_uDnTZXujtXC2seXyO8VghPAm6O8KKefZro3RZyQUWWiQqa49U-jV-H_qK0AJtcV_E8gxBn-92kmr25oxwXUBVQg30OSn7brrd2ZA__i_-2CGgh0vA=="
+          data-type="subscription">
+
           <div class="form-group">
-            <label class="form-label" for="name">이름</label>
-            <input type="text" id="name" class="form-input" placeholder="홍길동" required>
+            <label class="form-label" for="FIRSTNAME">이름</label>
+            <input type="text" id="FIRSTNAME" name="FIRSTNAME"
+              class="form-input" placeholder="홍길동" required>
           </div>
+
           <div class="form-group">
-            <label class="form-label" for="email">이메일</label>
-            <input type="email" id="email" class="form-input" placeholder="hello@example.com" required>
+            <label class="form-label" for="EMAIL">이메일</label>
+            <input type="email" id="EMAIL" name="EMAIL"
+              class="form-input" placeholder="hello@example.com" required>
           </div>
-          <div class="form-group">
-            <label class="form-label" for="role">관심 분야 (선택)</label>
-            <select id="role" class="form-input" style="cursor:pointer;appearance:none">
-              <option value="">선택해주세요</option>
-              <option value="collector">컬렉터 / 구매 관심</option>
-              <option value="gallery">갤러리 / 기관</option>
-              <option value="artist">작가 / 크리에이터</option>
-              <option value="fan">일반 팬</option>
-            </select>
-          </div>
+
+          <!-- Brevo 필수 hidden 필드 -->
+          <input type="text" name="email_address_check" value="" style="display:none">
+          <input type="hidden" name="locale" value="ko">
+
           <button type="submit" class="btn btn-dark" style="margin-top:0.4rem">소식 받기</button>
           <p class="form-note">구독 해지는 언제든 가능합니다.</p>
         </form>
 
+        <!-- 제출 완료 메시지 -->
         <div class="form-success" id="formSuccess">
           소식 받기 신청이 완료되었습니다.<br>ART:M 오픈 소식을 가장 먼저 전해드리겠습니다.
         </div>
@@ -228,12 +231,27 @@
     <span class="footer-copy">© 2025 Hwajung Ryu. All Rights Reserved.</span>
   </footer>
 
+  <!-- Brevo 폼 스크립트 -->
   <script>
-    function handleSubmit(e) {
-      e.preventDefault();
-      document.getElementById('subscribeForm').style.display = 'none';
-      document.getElementById('formSuccess').style.display = 'block';
-    }
+    window.REQUIRED_CODE_ERROR_MESSAGE = 'Please choose a country code';
+    window.LOCALE = 'ko';
+    window.EMAIL_INVALID_MESSAGE = '올바른 이메일 주소를 입력해주세요.';
+    window.REQUIRED_ERROR_MESSAGE = '필수 입력 항목입니다.';
+    window.GENERIC_INVALID_MESSAGE = '입력 정보를 다시 확인해주세요.';
+    var AUTOHIDE = Boolean(0);
+  </script>
+  <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
+
+  <script>
+    /* 제출 후 성공 메시지 표시 */
+    document.getElementById('subscribeForm').addEventListener('submit', function() {
+      var btn = this.querySelector('button[type="submit"]');
+      if (btn) { btn.textContent = '처리 중...'; btn.disabled = true; }
+      setTimeout(function() {
+        document.getElementById('subscribeForm').style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+      }, 1500);
+    });
   </script>
 </body>
 </html>
