@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>News — 류화정 · G.Ryu</title>
+  <meta name="description" content="류화정(G.Ryu) 작가 새소식. 전시 일정, ART:M 플랫폼 업데이트, 작품 소식.">
+  <meta property="og:title" content="News — 류화정 · G.Ryu">
+  <meta property="og:url" content="https://g-ryu.com/news.html">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .news-header {
+      padding: 3.5rem 2.5rem 2rem;
+      border-bottom: 0.5px solid var(--subtle);
+    }
+    .news-header h1 {
+      font-family: var(--font-serif-en);
+      font-size: 2.5rem;
+      font-weight: 300;
+      margin-top: 0.8rem;
+    }
+
+    .news-layout {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      min-height: calc(100vh - 200px);
+    }
+    .news-main {
+      border-right: 0.5px solid var(--subtle);
+    }
+    .news-entry {
+      padding: 2rem 2.5rem;
+      border-bottom: 0.5px solid var(--subtle);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .news-entry:hover { background: var(--paper-dark); }
+    .news-entry-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.8rem;
+    }
+    .news-entry-date {
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+    .news-entry-tag {
+      font-size: 0.52rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--gold-pale);
+      color: var(--gold);
+      padding: 0.2rem 0.5rem;
+    }
+    .news-entry-title {
+      font-family: var(--font-serif-en);
+      font-size: 1.1rem;
+      font-weight: 300;
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+    .news-entry-body {
+      font-size: 0.72rem;
+      line-height: 1.85;
+      color: var(--muted);
+    }
+
+    .news-sidebar {
+      padding: 2rem;
+    }
+    .sidebar-block { margin-bottom: 2.5rem; }
+    .sidebar-title {
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 0.5px solid var(--subtle);
+    }
+    .sidebar-tag {
+      display: inline-block;
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 0.5px solid var(--subtle);
+      padding: 0.25rem 0.6rem;
+      margin: 0.2rem;
+      cursor: pointer;
+      color: var(--muted);
+      transition: all 0.2s;
+    }
+    .sidebar-tag:hover,
+    .sidebar-tag.active { border-color: var(--ink); color: var(--ink); }
+
+    .subscribe-box {
+      border: 0.5px solid var(--subtle);
+      padding: 1.2rem;
+    }
+    .subscribe-box p {
+      font-size: 0.68rem;
+      line-height: 1.7;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .subscribe-input {
+      width: 100%;
+      border: 0.5px solid var(--subtle);
+      background: transparent;
+      padding: 0.5rem 0.7rem;
+      font-size: 0.65rem;
+      font-family: var(--font-sans);
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+      outline: none;
+    }
+    .subscribe-input:focus { border-color: var(--ink); }
+    .subscribe-input::placeholder { color: var(--muted); }
+
+    @media (max-width: 768px) {
+      .news-layout { grid-template-columns: 1fr; }
+      .news-sidebar { display: none; }
+      .news-entry { padding: 1.5rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo__en">G · Ryu</span>
+      <span class="nav-logo__kr">류화정</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="works.html">Works</a></li>
+      <li><a href="https://www.saatchiart.com/en-kr/account/artworks/1065821" target="_blank" rel="noopener" class="nav-ext">Saatchi Art</a></li>
+      <li><a href="#" class="nav-coming" style="opacity:0.4;cursor:default">Digital Goods</a></li>
+      <li><a href="artm.html" class="nav-artm">ART:M</a></li>
+      <li><a href="news.html" class="active">News</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <button class="nav-lang"><span>KR</span> / EN</button>
+  </nav>
+
+  <div class="page">
+
+    <div class="news-header">
+      <p class="u-label">News · 새소식</p>
+      <h1>News</h1>
+    </div>
+
+    <div class="news-layout">
+      <main class="news-main">
+
+        <article class="news-entry">
+          <div class="news-entry-head">
+            <span class="news-entry-date">2025. 08. 22</span>
+            <span class="news-entry-tag">공지</span>
+          </div>
+          <h2 class="news-entry-title">ART:M 플랫폼 준비 시작</h2>
+          <p class="news-entry-body">류화정 작가가 오랫동안 구상해온 온·오프라인 통합 예술 플랫폼 ART:M의 준비가 시작되었습니다. 작가에게 실제 전시 공간을, 관객에게 새로운 예술 경험을 제공하는 생태계를 만들어갑니다. 소식 받기를 통해 오픈 일정을 가장 먼저 받아보실 수 있습니다.</p>
+        </article>
+
+        <article class="news-entry">
+          <div class="news-entry-head">
+            <span class="news-entry-date">2025. 06. 10</span>
+            <span class="news-entry-tag">작품</span>
+          </div>
+          <h2 class="news-entry-title">Saatchi Art 신작 등록 완료</h2>
+          <p class="news-entry-body">Saatchi Art에 류화정 작가의 신작이 등록되었습니다. Painting, Photography, Drawing 등 다양한 매체의 작품을 만나보실 수 있습니다.</p>
+        </article>
+
+        <article class="news-entry">
+          <div class="news-entry-head">
+            <span class="news-entry-date">2025. 04. 01</span>
+            <span class="news-entry-tag">소식</span>
+          </div>
+          <h2 class="news-entry-title">G.Ryu 공식 홈페이지 오픈</h2>
+          <p class="news-entry-body">류화정 작가의 공식 홈페이지 g-ryu.com이 새롭게 오픈했습니다. 작품 포트폴리오, 작가 이력, 그리고 ART:M 플랫폼 소식을 이곳에서 가장 먼저 만나보실 수 있습니다.</p>
+        </article>
+
+      </main>
+
+      <aside class="news-sidebar">
+        <div class="sidebar-block">
+          <p class="sidebar-title">Category</p>
+          <span class="sidebar-tag active">전체</span>
+          <span class="sidebar-tag">공지</span>
+          <span class="sidebar-tag">작품</span>
+          <span class="sidebar-tag">전시</span>
+          <span class="sidebar-tag">ART:M</span>
+          <span class="sidebar-tag">소식</span>
+        </div>
+
+        <div class="sidebar-block">
+          <p class="sidebar-title">소식 받기</p>
+          <div class="subscribe-box">
+            <p>ART:M 오픈 소식과 새 전시 일정을 이메일로 받아보세요.</p>
+            <input type="email" class="subscribe-input" placeholder="이메일 주소">
+            <button class="btn btn-dark" style="width:100%;padding:0.6rem">구독하기</button>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="footer-logo">G · Ryu / 류화정</div>
+    <div class="footer-socials">
+      <a href="https://instagram.com/studio.gryu" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://threads.net/gilbert1737" target="_blank" rel="noopener">Threads</a>
+      <a href="https://facebook.com/G.Ryu1737" target="_blank" rel="noopener">Facebook</a>
+    </div>
+    <span class="footer-copy">© 2025 Hwajung Ryu. All Rights Reserved.</span>
+  </footer>
+
+</body>
+</html>

@@ -1,46 +1,544 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</title>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- SEO -->
+  <title>류화정 — 시각예술가 · G.Ryu · ART:M</title>
+  <meta name="description" content="류화정(Gilbert Ryu, G.Ryu)은 경기도 화성시를 기반으로 활동하는 시각예술가입니다. 파리 루브르 카루젤, 베네치아 국제아트페어 참가. Saatchi Art에서 작품을 만날 수 있습니다.">
+  <meta name="keywords" content="류화정, Gilbert Ryu, G.Ryu, 시각예술가, 한국 현대미술, Korean Contemporary Art, ART:M, Saatchi Art, 화성시 작가">
+  <meta name="author" content="류화정 Hwajung Ryu">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://g-ryu.com/">
+  <meta property="og:title" content="류화정 — 시각예술가 · G.Ryu">
+  <meta property="og:description" content="류화정(G.Ryu)의 공식 홈페이지. 시각예술가이자 ART:M 플랫폼 창립자.">
+  <meta property="og:image" content="https://g-ryu.com/images/hero-image.jpg">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:locale:alternate" content="en_US">
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "류화정",
+    "alternateName": ["Gilbert Ryu", "G.Ryu", "Hwajung Ryu"],
+    "jobTitle": "시각예술가",
+    "url": "https://g-ryu.com",
+    "image": "https://g-ryu.com/images/hero-image.jpg",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "화성시",
+      "addressRegion": "경기도",
+      "addressCountry": "KR"
+    },
+    "sameAs": [
+      "https://instagram.com/studio.gryu",
+      "https://threads.net/gilbert1737",
+      "https://facebook.com/G.Ryu1737",
+      "https://www.saatchiart.com/en-kr/account/artworks/1065821"
+    ]
+  }
+  </script>
+
   <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ── Hero ── */
+    .hero {
+      display: grid;
+      grid-template-columns: 5fr 4fr;
+      min-height: calc(100vh - 60px);
+      border-bottom: 0.5px solid var(--subtle);
+    }
+    .hero-left {
+      padding: 3.5rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 0.5px solid var(--subtle);
+    }
+    .hero-kicker {
+      font-size: 0.6rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+    .hero-name-kr {
+      font-family: var(--font-serif-kr);
+      font-size: 4rem;
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+    .hero-name-en {
+      font-family: var(--font-serif-en);
+      font-size: 1.3rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--muted);
+      margin-top: 0.4rem;
+      letter-spacing: 0.06em;
+    }
+    .hero-statement {
+      font-size: 0.76rem;
+      line-height: 2;
+      color: var(--muted);
+      max-width: 340px;
+      margin-top: 2rem;
+      padding-left: 1rem;
+      border-left: 1px solid var(--gold);
+    }
+    .hero-actions {
+      display: flex;
+      gap: 0.7rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .hero-meta {
+      display: flex;
+      gap: 2.5rem;
+      padding-top: 2rem;
+      border-top: 0.5px solid var(--subtle);
+    }
+    .meta-item { display: flex; flex-direction: column; gap: 0.15rem; }
+    .meta-val {
+      font-family: var(--font-serif-en);
+      font-size: 0.95rem;
+      font-weight: 300;
+    }
+    .meta-key {
+      font-size: 0.52rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+      background: #e2ddd6;
+    }
+    .hero-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0.9;
+    }
+    .hero-caption {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      right: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .hero-caption-title {
+      font-family: var(--font-serif-en);
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: rgba(245,242,237,0.8);
+    }
+    .hero-caption-year {
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(245,242,237,0.5);
+    }
+
+    /* ── ART:M Teaser ── */
+    .artm-teaser {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .artm-card {
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-bottom: 0.5px solid var(--subtle);
+    }
+    .artm-card:first-child {
+      border-right: 0.5px solid var(--subtle);
+      background: var(--ink);
+      color: var(--paper);
+    }
+    .artm-card:last-child { background: var(--gold-pale); }
+
+    .artm-ghost {
+      position: absolute;
+      font-family: var(--font-serif-en);
+      font-size: 7rem;
+      font-weight: 300;
+      right: -0.5rem;
+      bottom: -1.5rem;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      opacity: 0.06;
+      letter-spacing: -0.02em;
+    }
+    .artm-badge {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.7rem;
+      border: 0.5px solid;
+      margin-bottom: 1.5rem;
+    }
+    .artm-card:first-child .artm-badge { border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.5); }
+    .artm-card:last-child .artm-badge  { border-color: var(--gold); color: var(--gold); }
+
+    .artm-name {
+      font-family: var(--font-serif-en);
+      font-size: 2.2rem;
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+    .artm-card:first-child .artm-name { color: rgba(255,255,255,0.9); }
+    .artm-card:last-child  .artm-name { color: var(--ink); }
+
+    .artm-sub { font-size: 0.68rem; font-style: italic; margin-bottom: 0.8rem; }
+    .artm-card:first-child .artm-sub { color: rgba(255,255,255,0.4); }
+    .artm-card:last-child  .artm-sub { color: var(--muted); }
+
+    .artm-desc { font-size: 0.7rem; line-height: 1.85; }
+    .artm-card:first-child .artm-desc { color: rgba(255,255,255,0.35); }
+    .artm-card:last-child  .artm-desc { color: var(--muted); }
+
+    .artm-foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1.5rem;
+      padding-top: 1.2rem;
+    }
+    .artm-card:first-child .artm-foot { border-top: 0.5px solid rgba(255,255,255,0.1); }
+    .artm-card:last-child  .artm-foot { border-top: 0.5px solid rgba(154,124,79,0.2); }
+
+    .coming-tag {
+      font-size: 0.55rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* ── Works preview ── */
+    .works-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 200px 200px;
+      gap: 1px;
+      background: var(--subtle);
+    }
+    .work-item {
+      background: var(--paper-dark);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .work-item:first-child { grid-row: 1 / 3; }
+    .work-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .work-item:hover img { transform: scale(1.03); }
+    .work-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(14,13,12,0);
+      transition: background 0.3s;
+      display: flex;
+      align-items: flex-end;
+      padding: 1rem;
+    }
+    .work-item:hover .work-overlay { background: rgba(14,13,12,0.45); }
+    .work-info { opacity: 0; transition: opacity 0.3s; }
+    .work-item:hover .work-info { opacity: 1; }
+    .work-medium {
+      font-size: 0.55rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(245,242,237,0.6);
+      margin-bottom: 0.2rem;
+    }
+    .work-name {
+      font-family: var(--font-serif-en);
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: rgba(245,242,237,0.9);
+    }
+    /* placeholder when no image */
+    .work-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--paper-dark);
+      color: var(--subtle);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── News preview ── */
+    .news-grid {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 3rem;
+    }
+    .news-aside {
+      padding-top: 0.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .news-count {
+      font-family: var(--font-serif-en);
+      font-size: 3rem;
+      font-weight: 300;
+      line-height: 1;
+      color: var(--subtle);
+    }
+    .news-list { display: flex; flex-direction: column; }
+    .news-item {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      gap: 1rem;
+      align-items: start;
+      padding: 0.9rem 0;
+      border-bottom: 0.5px solid var(--subtle);
+    }
+    .news-item:first-child { border-top: 0.5px solid var(--subtle); }
+    .news-date {
+      font-size: 0.58rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      padding-top: 2px;
+    }
+    .news-title { font-size: 0.76rem; line-height: 1.55; }
+    .news-type {
+      font-size: 0.52rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--gold-pale);
+      color: var(--gold);
+      padding: 0.2rem 0.5rem;
+      white-space: nowrap;
+      margin-top: 2px;
+    }
+
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { height: 55vw; }
+      .artm-teaser { grid-template-columns: 1fr; }
+      .artm-card:first-child { border-right: none; border-bottom: 0.5px solid var(--subtle); }
+      .works-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 160px 160px 160px; }
+      .work-item:first-child { grid-row: auto; grid-column: 1 / -1; }
+      .news-grid { grid-template-columns: 1fr; gap: 1rem; }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="youtube.html">YouTube</a></li>
-        <li><a href="about.html">About</a></li>
-      </ul>
-    </nav>
-  </header>
-  <main class="hero-section">
-    <!-- SNS 링크 -->
-    <div class="sns-links">
-      <a href="https://instagram.com/studio.gryu" target="_blank" rel="noopener noreferrer"
-         aria-label="Instagram - studio.gryu" title="Instagram">
-        <img src="/images/instagram-icon.png" alt="Instagram" width="28" height="28">
-      </a>
 
-      <a href="https://threads.net/gilbert1737" target="_blank" rel="noopener noreferrer"
-         aria-label="Threads - gilbert1737" title="Threads">
-        <img src="/images/threads-icon.png" alt="Threads" width="28" height="28">
-      </a>
-
-      <a href="https://facebook.com/G.Ryu1737" target="_blank" rel="noopener noreferrer"
-         aria-label="Facebook - G.Ryu1737" title="Facebook">
-        <img src="/images/facebook-icon.png" alt="Facebook" width="28" height="28">
-      </a>
+  <!-- POPUP -->
+  <div class="popup-overlay" id="popup" role="dialog" aria-modal="true" aria-label="ART:M 소식">
+    <div class="popup">
+      <button class="popup-close" onclick="closePopup()" aria-label="닫기">✕</button>
+      <div class="popup-inner">
+        <span class="popup-tag">새소식 · News</span>
+        <h2 class="popup-title">ART:M,<br>곧 시작됩니다</h2>
+        <p class="popup-body">류화정 작가가 만들어가는 온·오프라인 예술 플랫폼 ART:M이 준비 중입니다. 전시 일정, 플랫폼 오픈 안내를 가장 먼저 받아보세요.</p>
+        <div class="popup-foot">
+          <a href="artm.html" class="btn btn-dark">소식 받기</a>
+          <button class="popup-skip" onclick="closePopup()">다음에 보기</button>
+        </div>
+      </div>
     </div>
+  </div>
 
-  </main>
-  <footer>
-    <p>&copy; 2025 G.Ryu. All Rights Reserved.</p>
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo__en">G · Ryu</span>
+      <span class="nav-logo__kr">류화정</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="works.html">Works</a></li>
+      <li><a href="https://www.saatchiart.com/en-kr/account/artworks/1065821" target="_blank" rel="noopener" class="nav-ext">Saatchi Art</a></li>
+      <li><a href="#" class="nav-coming" style="opacity:0.4;cursor:default">Digital Goods</a></li>
+      <li><a href="artm.html" class="nav-artm">ART:M</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <button class="nav-lang"><span>KR</span> / EN</button>
+  </nav>
+
+  <div class="page">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-left">
+        <div>
+          <p class="hero-kicker">Visual Artist · Hwaseong-si, Gyeonggi-do, Korea</p>
+          <h1 class="hero-name-kr">류화정</h1>
+          <p class="hero-name-en">Hwajung Ryu · G.Ryu</p>
+          <p class="hero-statement">강의 지류처럼— 하나의 흐름에서 갈라져 나와 각자의 방향으로 흐릅니다. 작품은 그 흐름의 흔적입니다.</p>
+          <div class="hero-actions">
+            <a href="works.html" class="btn btn-dark">View Works</a>
+            <a href="https://www.saatchiart.com/en-kr/account/artworks/1065821" target="_blank" rel="noopener" class="btn btn-line">Saatchi Art ↗</a>
+          </div>
+        </div>
+        <div class="hero-meta">
+          <div class="meta-item">
+            <span class="meta-val">Saatchi Art</span>
+            <span class="meta-key">Gallery</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-val">Paris · Venice</span>
+            <span class="meta-key">International</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-val">ART:M</span>
+            <span class="meta-key">Platform · Preparing</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <img src="images/hero-image.jpg" alt="류화정 작품 이미지 — G.Ryu artwork">
+        <div class="hero-caption">
+          <span class="hero-caption-title">작품 이미지</span>
+          <span class="hero-caption-year">G.Ryu</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ART:M TEASER -->
+    <section class="artm-teaser" aria-label="ART:M 플랫폼 소개">
+      <div class="artm-card">
+        <div class="artm-ghost">ART:M</div>
+        <div>
+          <div class="artm-badge"><span class="blink"></span>Preparing</div>
+          <h2 class="artm-name">ART:M</h2>
+          <p class="artm-sub">온·오프라인 통합 예술 플랫폼</p>
+          <p class="artm-desc">작가가 작품을 만들고, 전시하고, 관객을 만나는 현실의 무대. 류화정이 만들어가는 예술 생태계입니다.</p>
+        </div>
+        <div class="artm-foot">
+          <a href="artm.html" class="btn btn-gold" style="padding:0.4rem 1rem;font-size:0.6rem">소식 받기 →</a>
+          <span class="coming-tag">Coming Soon</span>
+        </div>
+      </div>
+      <div class="artm-card">
+        <div class="artm-ghost" style="color:var(--gold)">Digital</div>
+        <div>
+          <div class="artm-badge"><span class="blink"></span>Preparing</div>
+          <h2 class="artm-name">Digital Goods</h2>
+          <p class="artm-sub">디지털 굿즈 · ART:M 내 출시 예정</p>
+          <p class="artm-desc">류화정 작가의 작품을 담은 디지털 굿즈. ART:M 플랫폼 오픈과 함께 공개됩니다.</p>
+        </div>
+        <div class="artm-foot">
+          <a href="artm.html" class="btn btn-gold" style="padding:0.4rem 1rem;font-size:0.6rem">소식 받기 →</a>
+          <span class="coming-tag">Coming Soon</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORKS PREVIEW -->
+    <section class="section" aria-label="작품 미리보기">
+      <div class="section-header">
+        <h2 class="section-title">Selected Works</h2>
+        <a href="https://www.saatchiart.com/en-kr/account/artworks/1065821" target="_blank" rel="noopener" class="section-more">Saatchi Art에서 전체 보기 ↗</a>
+      </div>
+      <div class="works-grid">
+        <div class="work-item">
+          <div class="work-placeholder">작품 이미지</div>
+          <div class="work-overlay">
+            <div class="work-info">
+              <p class="work-medium">Painting · 2024</p>
+              <h3 class="work-name">작품명</h3>
+            </div>
+          </div>
+        </div>
+        <div class="work-item">
+          <div class="work-placeholder">작품 이미지</div>
+          <div class="work-overlay"><div class="work-info"><p class="work-medium">Drawing · 2024</p><h3 class="work-name">작품명</h3></div></div>
+        </div>
+        <div class="work-item">
+          <div class="work-placeholder">작품 이미지</div>
+          <div class="work-overlay"><div class="work-info"><p class="work-medium">Mixed Media · 2023</p><h3 class="work-name">작품명</h3></div></div>
+        </div>
+        <div class="work-item">
+          <div class="work-placeholder">작품 이미지</div>
+          <div class="work-overlay"><div class="work-info"><p class="work-medium">Painting · 2023</p><h3 class="work-name">작품명</h3></div></div>
+        </div>
+      </div>
+      <div style="margin-top:1.5rem">
+        <a href="works.html" class="btn btn-line">Works 전체 보기</a>
+      </div>
+    </section>
+
+    <!-- NEWS PREVIEW -->
+    <section class="section" aria-label="새소식">
+      <div class="news-grid">
+        <div class="news-aside">
+          <p class="u-label">News · 새소식</p>
+          <span class="news-count">03</span>
+          <a href="news.html" class="section-more" style="margin-top:auto">전체 보기 →</a>
+        </div>
+        <div class="news-list">
+          <div class="news-item">
+            <span class="news-date">2025. 08</span>
+            <span class="news-title">ART:M 플랫폼 준비 시작 — 온·오프라인 예술 생태계를 만들어갑니다</span>
+            <span class="news-type">공지</span>
+          </div>
+          <div class="news-item">
+            <span class="news-date">2025. 06</span>
+            <span class="news-title">Saatchi Art 신작 등록 완료</span>
+            <span class="news-type">작품</span>
+          </div>
+          <div class="news-item">
+            <span class="news-date">2025. 04</span>
+            <span class="news-title">G.Ryu 공식 홈페이지 오픈</span>
+            <span class="news-type">소식</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /page -->
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-logo">G · Ryu / 류화정</div>
+    <div class="footer-socials">
+      <a href="https://instagram.com/studio.gryu" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://threads.net/gilbert1737" target="_blank" rel="noopener">Threads</a>
+      <a href="https://facebook.com/G.Ryu1737" target="_blank" rel="noopener">Facebook</a>
+    </div>
+    <span class="footer-copy">© 2025 Hwajung Ryu. All Rights Reserved.</span>
   </footer>
+
+  <script>
+    function closePopup() {
+      document.getElementById('popup').classList.add('hidden');
+      sessionStorage.setItem('popup_closed', '1');
+    }
+    if (sessionStorage.getItem('popup_closed')) {
+      document.getElementById('popup').classList.add('hidden');
+    }
+  </script>
 </body>
 </html>

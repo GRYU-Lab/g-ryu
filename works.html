@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Works — 류화정 · G.Ryu</title>
+  <meta name="description" content="류화정(G.Ryu) 작품 포트폴리오. Painting, Photography, Drawing, Mixed Media. Saatchi Art에서 구매 가능.">
+  <meta property="og:title" content="Works — 류화정 · G.Ryu">
+  <meta property="og:url" content="https://g-ryu.com/works.html">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .works-header {
+      padding: 3.5rem 2.5rem 2rem;
+      border-bottom: 0.5px solid var(--subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .works-header h1 {
+      font-family: var(--font-serif-en);
+      font-size: 2.5rem;
+      font-weight: 300;
+    }
+    .works-header p {
+      font-size: 0.7rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .works-filter {
+      padding: 1rem 2.5rem;
+      border-bottom: 0.5px solid var(--subtle);
+      display: flex;
+      gap: 0;
+    }
+    .filter-btn {
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: none;
+      border: none;
+      padding: 0.4rem 1rem;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .filter-btn:hover { color: var(--ink); }
+    .filter-btn.active { color: var(--ink); border-bottom-color: var(--ink); }
+
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--subtle);
+    }
+    .work-card {
+      background: var(--paper);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .work-card-img {
+      aspect-ratio: 4 / 5;
+      background: var(--paper-dark);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .work-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .work-card:hover .work-card-img img { transform: scale(1.04); }
+    .work-placeholder-text {
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: var(--subtle);
+    }
+    .work-card-info {
+      padding: 1rem 1.2rem;
+      border-top: 0.5px solid var(--subtle);
+    }
+    .work-card-title {
+      font-family: var(--font-serif-en);
+      font-size: 0.95rem;
+      font-weight: 300;
+      margin-bottom: 0.3rem;
+    }
+    .work-card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .work-card-medium {
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .work-card-link {
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border-bottom: 0.5px solid var(--gold);
+      padding-bottom: 1px;
+    }
+
+    .works-cta {
+      padding: 3rem 2.5rem;
+      text-align: center;
+      border-top: 0.5px solid var(--subtle);
+    }
+    .works-cta p {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+      font-style: italic;
+    }
+
+    @media (max-width: 768px) {
+      .works-grid { grid-template-columns: repeat(2, 1fr); }
+      .works-header { flex-direction: column; gap: 0.5rem; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo__en">G · Ryu</span>
+      <span class="nav-logo__kr">류화정</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="works.html" class="active">Works</a></li>
+      <li><a href="https://www.saatchiart.com/en-kr/account/artworks/1065821" target="_blank" rel="noopener" class="nav-ext">Saatchi Art</a></li>
+      <li><a href="#" class="nav-coming" style="opacity:0.4;cursor:default">Digital Goods</a></li>
+      <li><a href="artm.html" class="nav-artm">ART:M</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <button class="nav-lang"><span>KR</span> / EN</button>
+  </nav>
+
+  <div class="page">
+
+    <div class="works-header">
+      <div>
+        <p class="u-label" style="margin-bottom:0.8rem">Portfolio</p>
+        <h1>Works</h1>
+      </div>
+      <p>작품 구매는 Saatchi Art에서 가능합니다</p>
+    </div>
+
+    <div class="works-filter">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="painting">Painting</button>
+      <button class="filter-btn" data-filter="photography">Photography</button>
+      <button class="filter-btn" data-filter="drawing">Drawing</button>
+      <button class="filter-btn" data-filter="mixed">Mixed Media</button>
+    </div>
+
+    <div class="works-grid">
+      <!-- 작품 이미지는 images/ 폴더에 추가 후 src 교체 -->
+      <div class="work-card" data-category="painting">
+        <div class="work-card-img"><span class="work-placeholder-text">작품 이미지</span></div>
+        <div class="work-card-info">
+          <h2 class="work-card-title">작품명</h2>
+          <div class="work-card-meta">
+            <span class="work-card-medium">Painting · 2024</span>
+            <a href="https://www.saatchiart.com/en-kr/account/artworks/1065821" target="_blank" rel="noopener" class="work-card-link">구매 ↗</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-card" data-category="photography">
+        <div class="work-card-img"><span class="work-placeholder-text">작품 이미지</span></div>
+        <div class="work-card-info">
+          <h2 class="work-card-title">작품명</h2>
+          <div class="work-card-meta">
+            <span class="work-card-medium">Photography · 2024</span>
+            <a href="https://www.saatchiart.com/en-kr/account/artworks/1065821" target="_blank" rel="noopener" class="work-card-link">구매 ↗</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-card" data-category="drawing">
+        <div class="work-card-img"><span class="work-placeholder-text">작품 이미지</span></div>
+        <div class="work-card-info">
+          <h2 class="work-card-title">작품명</h2>
+          <div class="work-card-meta">
+            <span class="work-card-medium">Drawing · 2023</span>
+            <a href="https://www.saatchiart.com/en-kr/account/artworks/1065821" target="_blank" rel="noopener" class="work-card-link">구매 ↗</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-card" data-category="mixed">
+        <div class="work-card-img"><span class="work-placeholder-text">작품 이미지</span></div>
+        <div class="work-card-info">
+          <h2 class="work-card-title">작품명</h2>
+          <div class="work-card-meta">
+            <span class="work-card-medium">Mixed Media · 2023</span>
+            <a href="https://www.saatchiart.com/en-kr/account/artworks/1065821" target="_blank" rel="noopener" class="work-card-link">구매 ↗</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-card" data-category="painting">
+        <div class="work-card-img"><span class="work-placeholder-text">작품 이미지</span></div>
+        <div class="work-card-info">
+          <h2 class="work-card-title">작품명</h2>
+          <div class="work-card-meta">
+            <span class="work-card-medium">Painting · 2022</span>
+            <a href="https://www.saatchiart.com/en-kr/account/artworks/1065821" target="_blank" rel="noopener" class="work-card-link">구매 ↗</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-card" data-category="photography">
+        <div class="work-card-img"><span class="work-placeholder-text">작품 이미지</span></div>
+        <div class="work-card-info">
+          <h2 class="work-card-title">작품명</h2>
+          <div class="work-card-meta">
+            <span class="work-card-medium">Photography · 2022</span>
+            <a href="https://www.saatchiart.com/en-kr/account/artworks/1065821" target="_blank" rel="noopener" class="work-card-link">구매 ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="works-cta">
+      <p>Saatchi Art에서 류화정 작가의 모든 작품을 확인하실 수 있습니다</p>
+      <a href="https://www.saatchiart.com/en-kr/account/artworks/1065821" target="_blank" rel="noopener" class="btn btn-dark">Saatchi Art에서 전체 보기 ↗</a>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="footer-logo">G · Ryu / 류화정</div>
+    <div class="footer-socials">
+      <a href="https://instagram.com/studio.gryu" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://threads.net/gilbert1737" target="_blank" rel="noopener">Threads</a>
+      <a href="https://facebook.com/G.Ryu1737" target="_blank" rel="noopener">Facebook</a>
+    </div>
+    <span class="footer-copy">© 2025 Hwajung Ryu. All Rights Reserved.</span>
+  </footer>
+
+  <script>
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const workCards  = document.querySelectorAll('.work-card');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        workCards.forEach(card => {
+          card.style.display = (filter === 'all' || card.dataset.category === filter) ? '' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>

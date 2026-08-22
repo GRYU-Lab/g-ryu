@@ -1,55 +1,306 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About</title>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <title>About — 류화정 · G.Ryu</title>
+  <meta name="description" content="류화정(Gilbert Ryu, G.Ryu) 작가 소개. 파리 루브르 카루젤, 베네치아 국제아트페어 참가. 스튜디오 지류 대표, 예술의숲 소속 작가.">
+  <meta property="og:title" content="About — 류화정 · G.Ryu">
+  <meta property="og:url" content="https://g-ryu.com/about.html">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .about-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 60vh;
+      border-bottom: 0.5px solid var(--subtle);
+    }
+    .about-hero-left {
+      padding: 4rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      border-right: 0.5px solid var(--subtle);
+    }
+    .about-hero-right {
+      background: var(--paper-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem;
+    }
+    .about-name-kr {
+      font-family: var(--font-serif-kr);
+      font-size: 3.2rem;
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+    .about-name-en {
+      font-family: var(--font-serif-en);
+      font-size: 1.1rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .about-bio {
+      font-size: 0.76rem;
+      line-height: 2;
+      color: var(--muted);
+      max-width: 400px;
+    }
+    .about-affil {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .affil-item {
+      font-size: 0.68rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .affil-item::before {
+      content: '';
+      width: 16px;
+      height: 0.5px;
+      background: var(--gold);
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    /* CV Section */
+    .cv-section {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 0;
+    }
+    .cv-nav {
+      border-right: 0.5px solid var(--subtle);
+      padding: 2.5rem 0;
+      position: sticky;
+      top: 60px;
+      height: fit-content;
+    }
+    .cv-nav a {
+      display: block;
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0.6rem 2rem;
+      transition: color 0.2s;
+      border-left: 1px solid transparent;
+    }
+    .cv-nav a:hover { color: var(--ink); }
+    .cv-nav a.active { color: var(--ink); border-left-color: var(--gold); }
+
+    .cv-body { padding: 2.5rem; }
+    .cv-block { margin-bottom: 3rem; }
+    .cv-block-title {
+      font-family: var(--font-serif-en);
+      font-size: 1.1rem;
+      font-weight: 300;
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 0.5px solid var(--subtle);
+    }
+    .cv-item {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 1rem;
+      padding: 0.8rem 0;
+      border-bottom: 0.5px solid var(--subtle);
+    }
+    .cv-item:last-child { border-bottom: none; }
+    .cv-year {
+      font-size: 0.65rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      padding-top: 2px;
+    }
+    .cv-content { display: flex; flex-direction: column; gap: 0.2rem; }
+    .cv-title { font-size: 0.78rem; line-height: 1.5; }
+    .cv-venue {
+      font-size: 0.65rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+    .cv-tag {
+      display: inline-block;
+      font-size: 0.5rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--gold-pale);
+      color: var(--gold);
+      padding: 0.15rem 0.4rem;
+      margin-top: 0.2rem;
+      width: fit-content;
+    }
+
+    @media (max-width: 768px) {
+      .about-hero { grid-template-columns: 1fr; }
+      .about-hero-right { display: none; }
+      .cv-section { grid-template-columns: 1fr; }
+      .cv-nav { display: none; }
+      .cv-item { grid-template-columns: 70px 1fr; }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="youtube.html">YouTube</a></li>
-        <li><a href="about.html" class="active">About</a></li>
-      </ul>
-    </nav>
-  </header>
-  <main class="page-content">
-    <div class="about-content">
-      <img src="assets/profile.jpg" alt="G.Ryu" class="profile-photo">
-      <div class="about-text">
-        <h2>류화정 (Gilbert Ryu)</h2>
-        <p>현재는 스튜디오 '스튜디오 지류' 대표<br>'예술의숲'소속 작가</p>
-        <h3>개인전</h3>
-        <ul>
-          <li>그들의 삶 - Cameroon (2016. 06. 20 ~ 2017. 06. 30)</li>
-          <ul>
-            <li>A-Tree gallery, 사진창고, Les filosopi, 8Street gallery, 아마추어 작업실, 티마크그랜드호텔 등</li>
-          </ul>
-        </ul>
-        <h3>단체전</h3>
-        <ul>
-          <li>2015. 12. 18 ~ 2016. 01. 17 에이트리갤러리 사진전 "먼 번째 나무" / A-Tree gallery</li>
-          <li>2016. 08. 16 ~ 27 시와 다시 희망을 노래하다 / 수원시미술전시관</li>
-          <li>2016. 12. 10 ~ 2017. 01. 10 상생프로젝트 / 정선 삼탄아트마인</li>
-          <li>2017. 03. 30 ~ 04. 07 에이트리갤러리 사진전 "다섯 번째 나무" / Art Space Hoseo</li>
-          <li>2022. 09. 01 ~ 09. 04 Focus art fair in PARIS / Carousel de Louvre</li>
-          <li>2022. 12. 02 ~ 12. 23 Venice international art fair 2022-16th edtion/ EGO'Boutique Hotel Palazzo Bembo</li>
-        </ul>
-        <h3>교육</h3>
-        <ul>
-          <li>2016. 01. 05 ~ 02. 28 경기 꿈의 학교 "나무 사진예술학교" 강사 및 멘토</li>
-        </ul>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo__en">G · Ryu</span>
+      <span class="nav-logo__kr">류화정</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="works.html">Works</a></li>
+      <li><a href="https://www.saatchiart.com/en-kr/account/artworks/1065821" target="_blank" rel="noopener" class="nav-ext">Saatchi Art</a></li>
+      <li><a href="#" class="nav-coming" style="opacity:0.4;cursor:default">Digital Goods</a></li>
+      <li><a href="artm.html" class="nav-artm">ART:M</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+    </ul>
+    <button class="nav-lang"><span>KR</span> / EN</button>
+  </nav>
+
+  <div class="page">
+
+    <!-- ABOUT HERO -->
+    <section class="about-hero">
+      <div class="about-hero-left">
+        <p class="u-label" style="margin-bottom:2rem">Artist Statement</p>
+        <h1 class="about-name-kr">류화정</h1>
+        <p class="about-name-en">Hwajung Ryu · Gilbert Ryu · G.Ryu</p>
+        <p class="about-bio">강의 지류(支流)처럼, 하나의 흐름에서 갈라져 나와 각자의 방향으로 흐릅니다. G.Ryu라는 이름은 한국어 '지류'에서 비롯되었습니다.<br><br>경기도 화성시를 기반으로 활동하는 시각예술가로, 스튜디오 지류를 운영하며 Saatchi Art를 통해 국제 미술 시장과 연결하고 있습니다. 파리, 베네치아 등 해외 아트페어 참가 이력을 갖고 있으며, 현재는 온·오프라인 통합 예술 플랫폼 ART:M을 준비 중입니다.</p>
+      </div>
+      <div class="about-hero-right">
+        <div class="about-affil">
+          <p class="u-label" style="margin-bottom:1rem">Affiliation</p>
+          <div class="affil-item">스튜디오 지류 대표</div>
+          <div class="affil-item">예술의숲 소속 작가</div>
+          <div class="affil-item">Saatchi Art 등록 작가</div>
+          <div class="affil-item">ART:M 창립자 (준비중)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CV -->
+    <div class="cv-section">
+      <nav class="cv-nav" aria-label="CV 섹션 이동">
+        <p class="u-label" style="padding:0 2rem;margin-bottom:1rem">CV</p>
+        <a href="#solo" class="active">개인전</a>
+        <a href="#group">단체전</a>
+        <a href="#education">교육</a>
+        <a href="#online">온라인 판매</a>
+      </nav>
+
+      <div class="cv-body">
+
+        <!-- 개인전 -->
+        <div class="cv-block" id="solo">
+          <h2 class="cv-block-title">Solo Exhibition · 개인전</h2>
+          <div class="cv-item">
+            <span class="cv-year">2016–2017</span>
+            <div class="cv-content">
+              <span class="cv-title">그들의 삶 — Cameroon</span>
+              <span class="cv-venue">A-Tree Gallery · 사진창고 · Les filosopi · 8Street Gallery · 아마추어 작업실 · 티마크그랜드호텔</span>
+              <span class="cv-tag">순회 개인전</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 단체전 -->
+        <div class="cv-block" id="group">
+          <h2 class="cv-block-title">Group Exhibition · 단체전</h2>
+          <div class="cv-item">
+            <span class="cv-year">2022. 12</span>
+            <div class="cv-content">
+              <span class="cv-title">Venice International Art Fair 2022 — 16th Edition</span>
+              <span class="cv-venue">EGO' Boutique Hotel Palazzo Bembo, Venice, Italy</span>
+              <span class="cv-tag">해외</span>
+            </div>
+          </div>
+          <div class="cv-item">
+            <span class="cv-year">2022. 09</span>
+            <div class="cv-content">
+              <span class="cv-title">Focus Art Fair in Paris</span>
+              <span class="cv-venue">Carousel du Louvre, Paris, France</span>
+              <span class="cv-tag">해외</span>
+            </div>
+          </div>
+          <div class="cv-item">
+            <span class="cv-year">2017. 03</span>
+            <div class="cv-content">
+              <span class="cv-title">에이트리갤러리 사진전 "다섯 번째 나무"</span>
+              <span class="cv-venue">Art Space Hoseo</span>
+            </div>
+          </div>
+          <div class="cv-item">
+            <span class="cv-year">2016. 12</span>
+            <div class="cv-content">
+              <span class="cv-title">상생프로젝트</span>
+              <span class="cv-venue">정선 삼탄아트마인</span>
+            </div>
+          </div>
+          <div class="cv-item">
+            <span class="cv-year">2016. 08</span>
+            <div class="cv-content">
+              <span class="cv-title">시와 다시 희망을 노래하다</span>
+              <span class="cv-venue">수원시미술전시관</span>
+            </div>
+          </div>
+          <div class="cv-item">
+            <span class="cv-year">2015. 12</span>
+            <div class="cv-content">
+              <span class="cv-title">에이트리갤러리 사진전 "먼 번째 나무"</span>
+              <span class="cv-venue">A-Tree Gallery</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 교육 -->
+        <div class="cv-block" id="education">
+          <h2 class="cv-block-title">Education · 교육</h2>
+          <div class="cv-item">
+            <span class="cv-year">2016. 01–02</span>
+            <div class="cv-content">
+              <span class="cv-title">경기 꿈의 학교 "나무 사진예술학교"</span>
+              <span class="cv-venue">강사 및 멘토</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 온라인 판매 -->
+        <div class="cv-block" id="online">
+          <h2 class="cv-block-title">Online Gallery · 온라인 판매</h2>
+          <div class="cv-item">
+            <span class="cv-year">현재</span>
+            <div class="cv-content">
+              <span class="cv-title">Saatchi Art</span>
+              <span class="cv-venue">Gilbert Ryu — 작품 9점 등록</span>
+              <a href="https://www.saatchiart.com/en-kr/account/artworks/1065821" target="_blank" rel="noopener" class="cv-tag" style="text-decoration:none">작품 보기 ↗</a>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
-  </main>
-  <footer>
-    <p>&copy; 2025 G.Ryu. All Rights Reserved.</p>
+
+  </div>
+
+  <footer class="footer">
+    <div class="footer-logo">G · Ryu / 류화정</div>
+    <div class="footer-socials">
+      <a href="https://instagram.com/studio.gryu" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://threads.net/gilbert1737" target="_blank" rel="noopener">Threads</a>
+      <a href="https://facebook.com/G.Ryu1737" target="_blank" rel="noopener">Facebook</a>
+    </div>
+    <span class="footer-copy">© 2025 Hwajung Ryu. All Rights Reserved.</span>
   </footer>
+
 </body>
 </html>
