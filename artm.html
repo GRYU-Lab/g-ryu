@@ -207,12 +207,14 @@
           <!-- Brevo 필수 hidden 필드 -->
           <input type="text" name="email_address_check" value="" style="display:none">
           <input type="hidden" name="locale" value="ko">
+          <!-- 제출 후 돌아올 페이지 -->
+          <input type="hidden" name="redirect" value="https://g-ryu.com/artm.html?subscribed=1">
 
           <button type="submit" class="btn btn-dark" style="margin-top:0.4rem">소식 받기</button>
           <p class="form-note">구독 해지는 언제든 가능합니다.</p>
         </form>
 
-        <!-- 제출 완료 메시지 -->
+        <!-- 구독 완료 메시지 (redirect 후 표시) -->
         <div class="form-success" id="formSuccess">
           소식 받기 신청이 완료되었습니다.<br>ART:M 오픈 소식을 가장 먼저 전해드리겠습니다.
         </div>
@@ -231,27 +233,12 @@
     <span class="footer-copy">© 2025 Hwajung Ryu. All Rights Reserved.</span>
   </footer>
 
-  <!-- Brevo 폼 스크립트 -->
   <script>
-    window.REQUIRED_CODE_ERROR_MESSAGE = 'Please choose a country code';
-    window.LOCALE = 'ko';
-    window.EMAIL_INVALID_MESSAGE = '올바른 이메일 주소를 입력해주세요.';
-    window.REQUIRED_ERROR_MESSAGE = '필수 입력 항목입니다.';
-    window.GENERIC_INVALID_MESSAGE = '입력 정보를 다시 확인해주세요.';
-    var AUTOHIDE = Boolean(0);
-  </script>
-  <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
-
-  <script>
-    /* 제출 후 성공 메시지 표시 */
-    document.getElementById('subscribeForm').addEventListener('submit', function() {
-      var btn = this.querySelector('button[type="submit"]');
-      if (btn) { btn.textContent = '처리 중...'; btn.disabled = true; }
-      setTimeout(function() {
-        document.getElementById('subscribeForm').style.display = 'none';
-        document.getElementById('formSuccess').style.display = 'block';
-      }, 1500);
-    });
+    /* URL에 ?subscribed=1 있으면 성공 메시지 표시 */
+    if (new URLSearchParams(window.location.search).get('subscribed') === '1') {
+      document.getElementById('subscribeForm').style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    }
   </script>
 </body>
 </html>
