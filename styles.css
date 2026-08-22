@@ -289,3 +289,56 @@ ul { list-style: none; }
   .section { padding: 2.5rem 1.2rem; }
   .footer { flex-direction: column; gap: 1rem; text-align: center; }
 }
+
+/* ── Image Protection ────────────────────────────────────── */
+
+/* 이미지 드래그·선택 방지 */
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
+  -webkit-user-select: none;
+  user-select: none;
+  pointer-events: none;   /* 이미지 자체 클릭/드래그 차단 */
+}
+
+/* 전체 텍스트 선택 방지 (작품 페이지 한정 — .no-select 클래스로 제어) */
+.no-select {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* 이미지 위에 씌우는 투명 보호 레이어 */
+.img-protect {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  cursor: default;
+  /* 투명하지만 이미지 위에 올라가 우클릭·드래그 차단 */
+  background: transparent;
+}
+
+/* 저작권 워터마크 오버레이 */
+.img-watermark {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.7rem;
+  font-size: 0.52rem;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.35);
+  pointer-events: none;
+  user-select: none;
+  z-index: 11;
+  font-family: var(--font-sans);
+}
+
+/* 인쇄 시 이미지 숨김 */
+@media print {
+  img, .work-item, .work-card, .hero-right { display: none !important; }
+  body::after {
+    content: '© 2025 Hwajung Ryu. All rights reserved. Unauthorized reproduction is prohibited.';
+    display: block;
+    padding: 2rem;
+    font-size: 0.8rem;
+    color: #666;
+  }
+}
