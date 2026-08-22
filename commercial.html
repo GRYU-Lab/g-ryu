@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Commercial — 류화정 · G.Ryu</title>
+  <meta name="description" content="류화정(G.Ryu) 상업사진. 음악가 프로필 촬영, 신혼여행 스냅. 촬영 문의 환영합니다.">
+  <meta name="keywords" content="음악가 프로필 사진, 뮤지션 프로필 촬영, 신혼여행 스냅, 스냅 촬영, G.Ryu, 류화정">
+  <meta property="og:title" content="Commercial — 류화정 · G.Ryu">
+  <meta property="og:url" content="https://g-ryu.com/commercial.html">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Photographer",
+    "name": "류화정",
+    "alternateName": ["G.Ryu", "Gilbert Ryu"],
+    "url": "https://g-ryu.com/commercial.html",
+    "knowsAbout": ["음악가 프로필 사진", "신혼여행 스냅 사진", "Commercial Photography"]
+  }
+  </script>
+
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .commercial-hero {
+      padding: 4rem 2.5rem 3rem;
+      border-bottom: 0.5px solid var(--subtle);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+    }
+    .commercial-hero h1 {
+      font-family: var(--font-serif-en);
+      font-size: 2.8rem;
+      font-weight: 300;
+      line-height: 1.1;
+      margin-top: 0.8rem;
+    }
+    .commercial-hero p {
+      font-size: 0.75rem;
+      line-height: 1.9;
+      color: var(--muted);
+    }
+    .commercial-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .commercial-contact p {
+      font-size: 0.68rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .contact-links {
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+
+    /* 카테고리 탭 */
+    .cat-tabs {
+      padding: 0 2.5rem;
+      display: flex;
+      border-bottom: 0.5px solid var(--subtle);
+    }
+    .cat-tab {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: none;
+      border: none;
+      padding: 1rem 1.2rem 0.9rem;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      border-bottom: 1.5px solid transparent;
+      margin-bottom: -0.5px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .cat-tab:hover { color: var(--ink); }
+    .cat-tab.active { color: var(--ink); border-bottom-color: var(--ink); }
+
+    /* 카테고리 섹션 */
+    .cat-section { display: none; }
+    .cat-section.active { display: block; }
+
+    .cat-header {
+      padding: 2.5rem 2.5rem 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      border-bottom: 0.5px solid var(--subtle);
+    }
+    .cat-header h2 {
+      font-family: var(--font-serif-en);
+      font-size: 1.8rem;
+      font-weight: 300;
+      margin-bottom: 0.5rem;
+    }
+    .cat-header h2 span {
+      display: block;
+      font-family: var(--font-serif-kr);
+      font-size: 1rem;
+      color: var(--muted);
+      font-style: normal;
+      margin-top: 0.2rem;
+    }
+    .cat-header p {
+      font-size: 0.73rem;
+      line-height: 1.9;
+      color: var(--muted);
+    }
+
+    /* Masonry 그리드 */
+    .commercial-grid {
+      columns: 3;
+      column-gap: 1px;
+      background: var(--subtle);
+      padding: 1px;
+    }
+    .commercial-card {
+      background: var(--paper);
+      break-inside: avoid;
+      margin-bottom: 1px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .commercial-card-img {
+      background: var(--paper-dark);
+      overflow: hidden;
+    }
+    .commercial-card-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.4s;
+    }
+    .commercial-card:hover .commercial-card-img img { transform: scale(1.03); }
+    .commercial-card-info {
+      padding: 0.8rem 1rem;
+      border-top: 0.5px solid var(--subtle);
+    }
+    .commercial-card-title {
+      font-family: var(--font-serif-en);
+      font-size: 0.85rem;
+      font-weight: 300;
+      margin-bottom: 0.2rem;
+    }
+    .commercial-card-meta {
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .work-placeholder {
+      display: block;
+      padding: 5rem 0;
+      text-align: center;
+      background: var(--paper-dark);
+      color: var(--subtle);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* 문의 섹션 */
+    .inquiry-section {
+      padding: 4rem 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      border-top: 0.5px solid var(--subtle);
+    }
+    .inquiry-section h3 {
+      font-family: var(--font-serif-en);
+      font-size: 1.4rem;
+      font-weight: 300;
+      margin-bottom: 1rem;
+    }
+    .inquiry-section p {
+      font-size: 0.73rem;
+      line-height: 1.9;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .inquiry-form { display: flex; flex-direction: column; gap: 0.6rem; }
+    .inquiry-input {
+      border: 0.5px solid var(--subtle);
+      background: transparent;
+      padding: 0.65rem 0.8rem;
+      font-size: 0.7rem;
+      font-family: var(--font-sans);
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .inquiry-input:focus { border-color: var(--ink); }
+    .inquiry-input::placeholder { color: var(--muted); }
+    textarea.inquiry-input { height: 120px; resize: vertical; }
+    .inquiry-success {
+      display: none;
+      padding: 1rem;
+      border: 0.5px solid var(--gold);
+      font-size: 0.72rem;
+      color: var(--gold);
+      line-height: 1.7;
+    }
+
+    @media (max-width: 960px) {
+      .commercial-hero { grid-template-columns: 1fr; gap: 2rem; }
+      .cat-header { grid-template-columns: 1fr; gap: 1rem; }
+      .commercial-grid { columns: 2; }
+      .inquiry-section { grid-template-columns: 1fr; gap: 2rem; }
+    }
+    @media (max-width: 600px) {
+      .commercial-grid { columns: 1; }
+      .commercial-hero { padding: 2.5rem 1.2rem; }
+      .cat-tabs { padding: 0 1.2rem; }
+      .cat-header { padding: 2rem 1.2rem; }
+      .inquiry-section { padding: 2.5rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo__en">G · Ryu</span>
+      <span class="nav-logo__kr">류화정</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="works.html">Works</a></li>
+      <li><a href="commercial.html" class="active">Commercial</a></li>
+      <li><a href="https://www.saatchiart.com/en-kr/account/artworks/1065821" target="_blank" rel="noopener" class="nav-ext">Saatchi Art</a></li>
+      <li><a href="#" class="nav-coming">Digital Goods</a></li>
+      <li><a href="#" class="nav-coming">나무의 기억</a></li>
+      <li><a href="artm.html" class="nav-artm">ART:M</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <button class="nav-lang"><span>KR</span> / EN</button>
+    <button class="nav-hamburger" id="navHamburger" aria-label="메뉴">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- 모바일 드로어 -->
+  <div class="nav-drawer" id="navDrawer">
+    <a href="works.html">Works</a>
+    <a href="commercial.html" class="active">Commercial</a>
+    <a href="https://www.saatchiart.com/en-kr/account/artworks/1065821" target="_blank" rel="noopener" class="nav-ext">Saatchi Art</a>
+    <a href="#" class="nav-coming">Digital Goods</a>
+    <a href="#" class="nav-coming">나무의 기억</a>
+    <a href="artm.html" class="nav-artm">ART:M</a>
+    <a href="news.html">News</a>
+    <a href="about.html">About</a>
+    <button class="nav-drawer-lang"><span>KR</span> / EN</button>
+  </div>
+
+  <div class="page">
+
+    <!-- HERO -->
+    <div class="commercial-hero">
+      <div>
+        <p class="u-label">Commercial Photography</p>
+        <h1>Commercial</h1>
+      </div>
+      <div class="commercial-contact">
+        <p>음악가 프로필, 신혼여행 스냅 등 상업사진 촬영을 진행하고 있습니다. 촬영 문의는 아래 연락처로 주세요.</p>
+        <div class="contact-links">
+          <a id="contactEmail" href="#" class="btn btn-dark">촬영 문의하기</a>
+          <a href="https://instagram.com/studio.gryu" target="_blank" rel="noopener" class="btn btn-line">Instagram ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 카테고리 탭 -->
+    <div class="cat-tabs" id="catTabs"></div>
+
+    <!-- 카테고리 콘텐츠 -->
+    <div id="catContents"></div>
+
+    <!-- 촬영 문의 폼 -->
+    <div class="inquiry-section">
+      <div>
+        <h3>촬영 문의</h3>
+        <p>촬영 종류, 일정, 장소 등을 간략히 적어 보내주시면 빠르게 답변드리겠습니다.</p>
+        <p style="font-size:0.65rem;color:var(--muted)">또는 Instagram DM으로도 문의 가능합니다.<br>@studio.gryu</p>
+      </div>
+      <div>
+        <form class="inquiry-form" id="inquiryForm">
+          <input type="text" class="inquiry-input" id="inqName" placeholder="이름" required>
+          <input type="email" class="inquiry-input" id="inqEmail" placeholder="이메일" required>
+          <select class="inquiry-input" id="inqType">
+            <option value="">촬영 종류 선택</option>
+            <option value="musician">음악가 프로필</option>
+            <option value="honeymoon">신혼여행 스냅</option>
+            <option value="other">기타</option>
+          </select>
+          <textarea class="inquiry-input" id="inqMsg" placeholder="문의 내용 (일정, 장소, 요청사항 등)"></textarea>
+          <button type="submit" class="btn btn-dark">문의 보내기</button>
+        </form>
+        <div class="inquiry-success" id="inquirySuccess">
+          문의가 접수되었습니다.<br>빠른 시일 내에 답변드리겠습니다.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="footer-logo">G · Ryu / 류화정</div>
+    <div class="footer-socials">
+      <a href="https://instagram.com/studio.gryu" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://threads.net/gilbert1737" target="_blank" rel="noopener">Threads</a>
+      <a href="https://facebook.com/G.Ryu1737" target="_blank" rel="noopener">Facebook</a>
+    </div>
+    <span class="footer-copy">© 2025 Hwajung Ryu. All Rights Reserved.</span>
+  </footer>
+
+  <script>
+    /* ── commercial.json 로드 ── */
+    fetch('commercial.json')
+      .then(function(r){ return r.json(); })
+      .then(function(data) {
+        /* 이메일 세팅 */
+        document.getElementById('contactEmail').href = 'mailto:' + data.contact.email;
+
+        var tabs     = document.getElementById('catTabs');
+        var contents = document.getElementById('catContents');
+
+        data.categories.forEach(function(cat, i) {
+          /* 탭 버튼 */
+          var btn = document.createElement('button');
+          btn.className = 'cat-tab' + (i === 0 ? ' active' : '');
+          btn.textContent = cat.label_kr + ' / ' + cat.label;
+          btn.dataset.id = cat.id;
+          btn.addEventListener('click', function() {
+            document.querySelectorAll('.cat-tab').forEach(function(b){ b.classList.remove('active'); });
+            document.querySelectorAll('.cat-section').forEach(function(s){ s.classList.remove('active'); });
+            btn.classList.add('active');
+            document.getElementById('cat-' + cat.id).classList.add('active');
+          });
+          tabs.appendChild(btn);
+
+          /* 섹션 */
+          var section = document.createElement('div');
+          section.className = 'cat-section' + (i === 0 ? ' active' : '');
+          section.id = 'cat-' + cat.id;
+
+          /* 헤더 */
+          var header = '<div class="cat-header">'
+            + '<div><h2>' + cat.label + '<span>' + cat.label_kr + '</span></h2></div>'
+            + '<div><p>' + cat.desc + '</p></div>'
+            + '</div>';
+
+          /* 그리드 */
+          var grid = '<div class="commercial-grid no-select">'
+            + cat.works.map(function(w) {
+                var img = w.image
+                  ? '<img src="' + w.image + '" alt="' + w.title + ' — 류화정 G.Ryu" draggable="false">'
+                  : '<span class="work-placeholder">작품 이미지</span>';
+                return '<div class="commercial-card">'
+                  + '<div class="commercial-card-img" style="position:relative">'
+                  + img
+                  + '<div class="img-protect"></div>'
+                  + '<span class="img-watermark">© G.Ryu</span>'
+                  + '</div>'
+                  + '<div class="commercial-card-info">'
+                  + '<p class="commercial-card-title">' + w.title + '</p>'
+                  + '<p class="commercial-card-meta">' + w.client + ' · ' + w.year + '</p>'
+                  + '</div></div>';
+              }).join('')
+            + '</div>';
+
+          section.innerHTML = header + grid;
+          contents.appendChild(section);
+        });
+      })
+      .catch(function(){
+        document.getElementById('catContents').innerHTML =
+          '<p style="padding:2rem;color:var(--muted);font-size:0.75rem">불러올 수 없습니다.</p>';
+      });
+
+    /* ── 문의 폼 (Brevo) ── */
+    document.getElementById('inquiryForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var btn = this.querySelector('button[type="submit"]');
+      btn.textContent = '전송 중...';
+      btn.disabled = true;
+
+      var formData = new FormData();
+      formData.append('FIRSTNAME', document.getElementById('inqName').value);
+      formData.append('EMAIL', document.getElementById('inqEmail').value);
+      formData.append('email_address_check', '');
+      formData.append('locale', 'ko');
+
+      fetch('https://553a93a7.sibforms.com/serve/MUIFAORLOdgYOZfJnC3EdQ81DawEPkdp3PvrlV1CCwOTi5P4619ZatxN2MiFgZKQqJdH1e4bZc3eyBeKJiZACNstTVJrabqU_uDnTZXujtXC2seXyO8VghPAm6O8KKefZro3RZyQUWWiQqa49U-jV-H_qK0AJtcV_E8gxBn-92kmr25oxwXUBVQg30OSn7brrd2ZA__i_-2CGgh0vA==', {
+        method: 'POST', body: formData, mode: 'no-cors'
+      })
+      .then(function() {
+        document.getElementById('inquiryForm').style.display = 'none';
+        document.getElementById('inquirySuccess').style.display = 'block';
+      })
+      .catch(function() {
+        btn.textContent = '문의 보내기';
+        btn.disabled = false;
+      });
+    });
+
+    /* ── 이미지 보호 ── */
+    document.addEventListener('contextmenu', function(e) {
+      if (e.target.tagName === 'IMG' || e.target.closest('.commercial-card')) {
+        e.preventDefault(); return false;
+      }
+    });
+    document.addEventListener('dragstart', function(e) {
+      if (e.target.tagName === 'IMG') { e.preventDefault(); return false; }
+    });
+
+    /* ── 햄버거 메뉴 ── */
+    var hamburger = document.getElementById('navHamburger');
+    var drawer    = document.getElementById('navDrawer');
+    hamburger.addEventListener('click', function() {
+      hamburger.classList.toggle('open');
+      drawer.classList.toggle('open');
+      document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+    });
+    drawer.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        hamburger.classList.remove('open');
+        drawer.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+  </script>
+</body>
+</html>
