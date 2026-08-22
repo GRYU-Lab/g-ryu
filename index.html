@@ -462,29 +462,7 @@
         <h2 class="section-title">Selected Works</h2>
         <a href="https://www.saatchiart.com/en-kr/account/artworks/1065821" target="_blank" rel="noopener" class="section-more">Saatchi Art에서 전체 보기 ↗</a>
       </div>
-      <div class="works-grid">
-        <div class="work-item">
-          <div class="work-placeholder">작품 이미지</div>
-          <div class="work-overlay">
-            <div class="work-info">
-              <p class="work-medium">Painting · 2024</p>
-              <h3 class="work-name">작품명</h3>
-            </div>
-          </div>
-        </div>
-        <div class="work-item">
-          <div class="work-placeholder">작품 이미지</div>
-          <div class="work-overlay"><div class="work-info"><p class="work-medium">Drawing · 2024</p><h3 class="work-name">작품명</h3></div></div>
-        </div>
-        <div class="work-item">
-          <div class="work-placeholder">작품 이미지</div>
-          <div class="work-overlay"><div class="work-info"><p class="work-medium">Mixed Media · 2023</p><h3 class="work-name">작품명</h3></div></div>
-        </div>
-        <div class="work-item">
-          <div class="work-placeholder">작품 이미지</div>
-          <div class="work-overlay"><div class="work-info"><p class="work-medium">Painting · 2023</p><h3 class="work-name">작품명</h3></div></div>
-        </div>
-      </div>
+      <div class="works-grid" id="worksGrid"></div>
       <div style="margin-top:1.5rem">
         <a href="works.html" class="btn btn-line">Works 전체 보기</a>
       </div>
@@ -495,26 +473,10 @@
       <div class="news-grid">
         <div class="news-aside">
           <p class="u-label">News · 새소식</p>
-          <span class="news-count">03</span>
+          <span class="news-count" id="newsCount">—</span>
           <a href="news.html" class="section-more" style="margin-top:auto">전체 보기 →</a>
         </div>
-        <div class="news-list">
-          <div class="news-item">
-            <span class="news-date">2026. 08</span>
-            <span class="news-title">ART:M 플랫폼 준비 시작 — 온·오프라인 예술 생태계를 만들어갑니다</span>
-            <span class="news-type">공지</span>
-          </div>          
-          <div class="news-item">
-            <span class="news-date">2026. 08</span>
-            <span class="news-title">G.Ryu 공식 홈페이지 리뉴얼</span>
-            <span class="news-type">소식</span>
-          </div>
-          <div class="news-item">
-            <span class="news-date">2018.</span>
-            <span class="news-title">Saatchi Art 신작 등록 완료</span>
-            <span class="news-type">작품</span>
-          </div>
-        </div>
+        <div class="news-list" id="newsList"></div>
       </div>
     </section>
 
@@ -532,6 +494,7 @@
   </footer>
 
   <script>
+    /* ── Popup ── */
     (function() {
       if (sessionStorage.getItem('popup_closed')) {
         var p = document.getElementById('popup');
@@ -545,6 +508,43 @@
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') closePopup();
     });
+
+    /* ── Works (featured만, 최대 4개) ── */
+    fetch('works.json')
+      .then(function(r){ return r.json(); })
+      .then(function(works) {
+        var featured = works.filter(function(w){ return w.featured; }).slice(0, 4);
+        var grid = document.getElementById('worksGrid');
+        grid.innerHTML = featured.map(function(w, i) {
+          var img = w.image
+            ? '<img src="' + w.image + '" alt="' + w.title + ' — 류화정 G.Ryu">'
+            : '<div class="work-placeholder">작품 이미지</div>';
+          return '<div class="work-item">'
+            + img
+            + '<div class="work-overlay"><div class="work-info">'
+            + '<p class="work-medium">' + w.medium + ' · ' + w.year + '</p>'
+            + '<h3 class="work-name">' + w.title + '</h3>'
+            + '</div></div></div>';
+        }).join('');
+      })
+      .catch(function(){ /* 이미지 없을 때 빈 grid 유지 */ });
+
+    /* ── News (최신 3개) ── */
+    fetch('news.json')
+      .then(function(r){ return r.json(); })
+      .then(function(news) {
+        var latest = news.slice(0, 3);
+        document.getElementById('newsCount').textContent =
+          String(news.length).padStart(2, '0');
+        document.getElementById('newsList').innerHTML = latest.map(function(n) {
+          return '<div class="news-item">'
+            + '<span class="news-date">' + n.date + '</span>'
+            + '<span class="news-title">' + n.title + '</span>'
+            + '<span class="news-type">' + n.type + '</span>'
+            + '</div>';
+        }).join('');
+      })
+      .catch(function(){});
   </script>
 </body>
 </html>

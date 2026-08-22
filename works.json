@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "title": "작품명",
+    "medium": "Painting",
+    "year": "2024",
+    "image": "images/works/work-001.jpg",
+    "saatchi_url": "https://www.saatchiart.com/en-kr/account/artworks/1065821",
+    "featured": true
+  },
+  {
+    "id": 2,
+    "title": "작품명",
+    "medium": "Photography",
+    "year": "2024",
+    "image": "images/works/work-002.jpg",
+    "saatchi_url": "https://www.saatchiart.com/en-kr/account/artworks/1065821",
+    "featured": true
+  },
+  {
+    "id": 3,
+    "title": "작품명",
+    "medium": "Drawing",
+    "year": "2023",
+    "image": "images/works/work-003.jpg",
+    "saatchi_url": "https://www.saatchiart.com/en-kr/account/artworks/1065821",
+    "featured": true
+  },
+  {
+    "id": 4,
+    "title": "작품명",
+    "medium": "Mixed Media",
+    "year": "2023",
+    "image": "images/works/work-004.jpg",
+    "saatchi_url": "https://www.saatchiart.com/en-kr/account/artworks/1065821",
+    "featured": false
+  },
+  {
+    "id": 5,
+    "title": "작품명",
+    "medium": "Painting",
+    "year": "2022",
+    "image": "images/works/work-005.jpg",
+    "saatchi_url": "https://www.saatchiart.com/en-kr/account/artworks/1065821",
+    "featured": false
+  },
+  {
+    "id": 6,
+    "title": "작품명",
+    "medium": "Photography",
+    "year": "2022",
+    "image": "images/works/work-006.jpg",
+    "saatchi_url": "https://www.saatchiart.com/en-kr/account/artworks/1065821",
+    "featured": false
+  }
+]

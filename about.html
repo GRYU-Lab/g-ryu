@@ -44,55 +44,28 @@
       color: var(--muted);
       margin-bottom: 1.5rem;
     }
-    .about-bio {
-      font-size: 0.76rem;
-      line-height: 2;
-      color: var(--muted);
-      max-width: 400px;
-    }
-    .about-affil {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
+    .about-bio { font-size: 0.76rem; line-height: 2; color: var(--muted); max-width: 400px; }
+    .about-affil { display: flex; flex-direction: column; gap: 0.4rem; }
     .affil-item {
-      font-size: 0.68rem;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      font-size: 0.68rem; color: var(--muted);
+      display: flex; align-items: center; gap: 0.5rem;
     }
     .affil-item::before {
-      content: '';
-      width: 16px;
-      height: 0.5px;
-      background: var(--gold);
-      display: inline-block;
-      flex-shrink: 0;
+      content: ''; width: 16px; height: 0.5px;
+      background: var(--gold); display: inline-block; flex-shrink: 0;
     }
 
-    /* CV Section */
-    .cv-section {
-      display: grid;
-      grid-template-columns: 200px 1fr;
-      gap: 0;
-    }
+    .cv-section { display: grid; grid-template-columns: 200px 1fr; }
     .cv-nav {
       border-right: 0.5px solid var(--subtle);
       padding: 2.5rem 0;
-      position: sticky;
-      top: 60px;
-      height: fit-content;
+      position: sticky; top: 60px; height: fit-content;
     }
     .cv-nav a {
-      display: block;
-      font-size: 0.62rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
-      padding: 0.6rem 2rem;
-      transition: color 0.2s;
-      border-left: 1px solid transparent;
+      display: block; font-size: 0.62rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted);
+      padding: 0.6rem 2rem; transition: color 0.2s;
+      border-left: 1px solid transparent; text-decoration: none;
     }
     .cv-nav a:hover { color: var(--ink); }
     .cv-nav a.active { color: var(--ink); border-left-color: var(--gold); }
@@ -100,44 +73,24 @@
     .cv-body { padding: 2.5rem; }
     .cv-block { margin-bottom: 3rem; }
     .cv-block-title {
-      font-family: var(--font-serif-en);
-      font-size: 1.1rem;
-      font-weight: 300;
-      margin-bottom: 1.2rem;
-      padding-bottom: 0.6rem;
+      font-family: var(--font-serif-en); font-size: 1.1rem; font-weight: 300;
+      margin-bottom: 1.2rem; padding-bottom: 0.6rem;
       border-bottom: 0.5px solid var(--subtle);
     }
     .cv-item {
-      display: grid;
-      grid-template-columns: 90px 1fr;
-      gap: 1rem;
-      padding: 0.8rem 0;
-      border-bottom: 0.5px solid var(--subtle);
+      display: grid; grid-template-columns: 90px 1fr; gap: 1rem;
+      padding: 0.8rem 0; border-bottom: 0.5px solid var(--subtle);
     }
     .cv-item:last-child { border-bottom: none; }
-    .cv-year {
-      font-size: 0.65rem;
-      letter-spacing: 0.06em;
-      color: var(--muted);
-      padding-top: 2px;
-    }
+    .cv-year { font-size: 0.65rem; letter-spacing: 0.06em; color: var(--muted); padding-top: 2px; }
     .cv-content { display: flex; flex-direction: column; gap: 0.2rem; }
     .cv-title { font-size: 0.78rem; line-height: 1.5; }
-    .cv-venue {
-      font-size: 0.65rem;
-      color: var(--muted);
-      font-style: italic;
-    }
+    .cv-venue { font-size: 0.65rem; color: var(--muted); font-style: italic; }
     .cv-tag {
-      display: inline-block;
-      font-size: 0.5rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      background: var(--gold-pale);
-      color: var(--gold);
-      padding: 0.15rem 0.4rem;
-      margin-top: 0.2rem;
-      width: fit-content;
+      display: inline-block; font-size: 0.5rem; letter-spacing: 0.12em;
+      text-transform: uppercase; background: var(--gold-pale); color: var(--gold);
+      padding: 0.15rem 0.4rem; margin-top: 0.2rem; width: fit-content;
+      text-decoration: none;
     }
 
     @media (max-width: 768px) {
@@ -159,7 +112,7 @@
     <ul class="nav-links">
       <li><a href="works.html">Works</a></li>
       <li><a href="https://www.saatchiart.com/en-kr/account/artworks/1065821" target="_blank" rel="noopener" class="nav-ext">Saatchi Art</a></li>
-      <li><a href="#" class="nav-coming" style="opacity:0.4;cursor:default">Digital Goods</a></li>
+      <li><a href="#" class="nav-coming">Digital Goods</a></li>
       <li><a href="artm.html" class="nav-artm">ART:M</a></li>
       <li><a href="news.html">News</a></li>
       <li><a href="about.html" class="active">About</a></li>
@@ -169,7 +122,6 @@
 
   <div class="page">
 
-    <!-- ABOUT HERO -->
     <section class="about-hero">
       <div class="about-hero-left">
         <p class="u-label" style="margin-bottom:2rem">Artist Statement</p>
@@ -188,7 +140,6 @@
       </div>
     </section>
 
-    <!-- CV -->
     <div class="cv-section">
       <nav class="cv-nav" aria-label="CV 섹션 이동">
         <p class="u-label" style="padding:0 2rem;margin-bottom:1rem">CV</p>
@@ -197,96 +148,8 @@
         <a href="#education">교육</a>
         <a href="#online">온라인 판매</a>
       </nav>
-
-      <div class="cv-body">
-
-        <!-- 개인전 -->
-        <div class="cv-block" id="solo">
-          <h2 class="cv-block-title">Solo Exhibition · 개인전</h2>
-          <div class="cv-item">
-            <span class="cv-year">2016–2017</span>
-            <div class="cv-content">
-              <span class="cv-title">그들의 삶 — Cameroon</span>
-              <span class="cv-venue">A-Tree Gallery · 사진창고 · Les filosopi · 8Street Gallery · 아마추어 작업실 · 티마크그랜드호텔</span>
-              <span class="cv-tag">순회 개인전</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 단체전 -->
-        <div class="cv-block" id="group">
-          <h2 class="cv-block-title">Group Exhibition · 단체전</h2>
-          <div class="cv-item">
-            <span class="cv-year">2022. 12</span>
-            <div class="cv-content">
-              <span class="cv-title">Venice International Art Fair 2022 — 16th Edition</span>
-              <span class="cv-venue">EGO' Boutique Hotel Palazzo Bembo, Venice, Italy</span>
-              <span class="cv-tag">해외</span>
-            </div>
-          </div>
-          <div class="cv-item">
-            <span class="cv-year">2022. 09</span>
-            <div class="cv-content">
-              <span class="cv-title">Focus Art Fair in Paris</span>
-              <span class="cv-venue">Carousel du Louvre, Paris, France</span>
-              <span class="cv-tag">해외</span>
-            </div>
-          </div>
-          <div class="cv-item">
-            <span class="cv-year">2017. 03</span>
-            <div class="cv-content">
-              <span class="cv-title">에이트리갤러리 사진전 "다섯 번째 나무"</span>
-              <span class="cv-venue">Art Space Hoseo</span>
-            </div>
-          </div>
-          <div class="cv-item">
-            <span class="cv-year">2016. 12</span>
-            <div class="cv-content">
-              <span class="cv-title">상생프로젝트</span>
-              <span class="cv-venue">정선 삼탄아트마인</span>
-            </div>
-          </div>
-          <div class="cv-item">
-            <span class="cv-year">2016. 08</span>
-            <div class="cv-content">
-              <span class="cv-title">시와 다시 희망을 노래하다</span>
-              <span class="cv-venue">수원시미술전시관</span>
-            </div>
-          </div>
-          <div class="cv-item">
-            <span class="cv-year">2015. 12</span>
-            <div class="cv-content">
-              <span class="cv-title">에이트리갤러리 사진전 "나무(Tree)"</span>
-              <span class="cv-venue">A-Tree Gallery</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 교육 -->
-        <div class="cv-block" id="education">
-          <h2 class="cv-block-title">Education · 교육</h2>
-          <div class="cv-item">
-            <span class="cv-year">2016. 01–02</span>
-            <div class="cv-content">
-              <span class="cv-title">경기 꿈의 학교 "나무 사진예술학교"</span>
-              <span class="cv-venue">강사 및 멘토</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 온라인 판매 -->
-        <div class="cv-block" id="online">
-          <h2 class="cv-block-title">Online Gallery · 온라인 판매</h2>
-          <div class="cv-item">
-            <span class="cv-year">현재</span>
-            <div class="cv-content">
-              <span class="cv-title">Saatchi Art</span>
-              <span class="cv-venue">Gilbert Ryu — 작품 9점 등록</span>
-              <a href="https://www.saatchiart.com/en-kr/account/artworks/1065821" target="_blank" rel="noopener" class="cv-tag" style="text-decoration:none">작품 보기 ↗</a>
-            </div>
-          </div>
-        </div>
-
+      <div class="cv-body" id="cvBody">
+        <p style="color:var(--muted);font-size:0.75rem">불러오는 중...</p>
       </div>
     </div>
 
@@ -302,5 +165,46 @@
     <span class="footer-copy">© 2025 Hwajung Ryu. All Rights Reserved.</span>
   </footer>
 
+  <script>
+    var sections = {
+      solo:      { label: 'Solo Exhibition · 개인전' },
+      group:     { label: 'Group Exhibition · 단체전' },
+      education: { label: 'Education · 교육' },
+      online:    { label: 'Online Gallery · 온라인 판매' }
+    };
+
+    function cvItem(item) {
+      var tag = item.tag
+        ? (item.url
+            ? '<a href="' + item.url + '" target="_blank" rel="noopener" class="cv-tag">' + item.tag + '</a>'
+            : '<span class="cv-tag">' + item.tag + '</span>')
+        : '';
+      return '<div class="cv-item">'
+        + '<span class="cv-year">' + item.year + '</span>'
+        + '<div class="cv-content">'
+        + '<span class="cv-title">' + item.title + '</span>'
+        + '<span class="cv-venue">' + item.venue + '</span>'
+        + tag
+        + '</div></div>';
+    }
+
+    fetch('cv.json')
+      .then(function(r){ return r.json(); })
+      .then(function(cv) {
+        var html = '';
+        Object.keys(sections).forEach(function(key) {
+          if (!cv[key] || !cv[key].length) return;
+          html += '<div class="cv-block" id="' + key + '">'
+            + '<h2 class="cv-block-title">' + sections[key].label + '</h2>'
+            + cv[key].map(cvItem).join('')
+            + '</div>';
+        });
+        document.getElementById('cvBody').innerHTML = html;
+      })
+      .catch(function(){
+        document.getElementById('cvBody').innerHTML =
+          '<p style="color:var(--muted);font-size:0.75rem">이력을 불러올 수 없습니다.</p>';
+      });
+  </script>
 </body>
 </html>

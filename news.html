@@ -152,35 +152,8 @@
     </div>
 
     <div class="news-layout">
-      <main class="news-main">
-
-        <article class="news-entry">
-          <div class="news-entry-head">
-            <span class="news-entry-date">2026. 08. 22</span>
-            <span class="news-entry-tag">공지</span>
-          </div>
-          <h2 class="news-entry-title">ART:M 플랫폼 준비 시작</h2>
-          <p class="news-entry-body">류화정 작가가 오랫동안 구상해온 온·오프라인 통합 예술 플랫폼 ART:M의 준비가 시작되었습니다. 작가에게 실제 전시 공간을, 관객에게 새로운 예술 경험을 제공하는 생태계를 만들어갑니다. 소식 받기를 통해 오픈 일정을 가장 먼저 받아보실 수 있습니다.</p>
-        </article>
-
-        <article class="news-entry">
-          <div class="news-entry-head">
-            <span class="news-entry-date">2026. 08. 22</span>
-            <span class="news-entry-tag">소식</span>
-          </div>
-          <h2 class="news-entry-title">G.Ryu 공식 홈페이지 리뉴얼</h2>
-          <p class="news-entry-body">류화정 작가의 공식 홈페이지 g-ryu.com이 새롭게 오픈했습니다. 작품 포트폴리오, 작가 이력, 그리고 ART:M 플랫폼 소식을 이곳에서 가장 먼저 만나보실 수 있습니다.</p>
-        </article>
-
-        <article class="news-entry">
-          <div class="news-entry-head">
-            <span class="news-entry-date">2018.</span>
-            <span class="news-entry-tag">작품</span>
-          </div>
-          <h2 class="news-entry-title">Saatchi Art 신작 등록 완료</h2>
-          <p class="news-entry-body">Saatchi Art에 류화정 작가의 신작이 등록되었습니다. Painting, Photography, Drawing 등 다양한 매체의 작품을 만나보실 수 있습니다.</p>
-        </article>        
-
+      <main class="news-main" id="newsMain">
+        <p style="padding:2rem;color:var(--muted);font-size:0.75rem">불러오는 중...</p>
       </main>
 
       <aside class="news-sidebar">
@@ -206,6 +179,48 @@
     </div>
 
   </div>
+
+  <script>
+    /* ── 카테고리 필터 ── */
+    var currentFilter = '전체';
+    document.querySelectorAll('.sidebar-tag').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.sidebar-tag').forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        currentFilter = btn.textContent.trim();
+        renderNews(window._newsData || []);
+      });
+    });
+
+    function renderNews(news) {
+      var filtered = currentFilter === '전체'
+        ? news
+        : news.filter(function(n){ return n.type === currentFilter; });
+      document.getElementById('newsMain').innerHTML = filtered.length
+        ? filtered.map(function(n) {
+            return '<article class="news-entry">'
+              + '<div class="news-entry-head">'
+              + '<span class="news-entry-date">' + n.date + '</span>'
+              + '<span class="news-entry-tag">' + n.type + '</span>'
+              + '</div>'
+              + '<h2 class="news-entry-title">' + n.title + '</h2>'
+              + '<p class="news-entry-body">' + n.body + '</p>'
+              + '</article>';
+          }).join('')
+        : '<p style="padding:2rem;color:var(--muted);font-size:0.75rem">해당 카테고리의 소식이 없습니다.</p>';
+    }
+
+    fetch('news.json')
+      .then(function(r){ return r.json(); })
+      .then(function(news) {
+        window._newsData = news;
+        renderNews(news);
+      })
+      .catch(function(){
+        document.getElementById('newsMain').innerHTML =
+          '<p style="padding:2rem;color:var(--muted);font-size:0.75rem">소식을 불러올 수 없습니다.</p>';
+      });
+  </script>
 
   <footer class="footer">
     <div class="footer-logo">G · Ryu / 류화정</div>
