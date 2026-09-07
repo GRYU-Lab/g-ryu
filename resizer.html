@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>무료 이미지 리사이저 + 워터마크 — G.Ryu Tools</title>
+<meta name="description" content="무료 온라인 이미지 리사이저. 내 로고·서명 이미지를 워터마크로 추가하고 원하는 위치에 드래그. 서버 업로드 없이 브라우저에서 처리. 배치 변환 지원.">
+<meta name="keywords" content="이미지 리사이저, 워터마크 무료, 서명 워터마크, 로고 워터마크, 이미지 크기 줄이기, 사진 용량 줄이기, image resizer watermark free">
+<meta property="og:title" content="무료 이미지 리사이저 + 워터마크 — G.Ryu Tools">
+<meta property="og:description" content="내 서명·로고를 워터마크로, 원하는 위치에 드래그. 서버 전송 없이 브라우저에서 처리. 완전 무료.">
+<meta property="og:url" content="https://g-ryu.com/resizer.html">
+<link rel="canonical" href="https://g-ryu.com/resizer.html">
+
+<!-- Google AdSense — 승인 후 Publisher ID 교체 -->
+<!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+
+<link rel="stylesheet" href="styles.css">
+<style>
+  .tool-wrap{max-width:960px;margin:0 auto;padding:2rem 1.5rem}
+  .tool-header{margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:0.5px solid var(--subtle)}
+  .tool-header h1{font-family:var(--font-serif-en);font-size:1.8rem;font-weight:300;margin-bottom:0.3rem}
+  .tool-header p{font-size:0.73rem;color:var(--muted)}
+  .tool-badges{display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.8rem}
+  .badge-item{font-size:0.56rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.6rem;background:var(--gold-pale);color:var(--gold)}
+
+  /* 광고 */
+  .ad-slot{background:var(--paper-dark);border:0.5px solid var(--subtle);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase}
+  .ad-top{height:90px;margin-bottom:1.5rem}
+  .ad-bottom{height:90px;margin-top:1.5rem}
+  .ad-side{width:160px;flex-shrink:0}
+
+  .tool-layout{display:flex;gap:1.5rem;align-items:flex-start}
+  .tool-main{flex:1;min-width:0}
+
+  .tc{background:white;border:0.5px solid var(--subtle);padding:1.2rem;margin-bottom:1rem}
+  .tc-title{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.8rem;padding-bottom:0.4rem;border-bottom:0.5px solid var(--subtle)}
+  .presets{display:grid;grid-template-columns:repeat(4,1fr);gap:0.5rem}
+  .preset{border:0.5px solid var(--subtle);background:var(--paper-dark);padding:0.7rem;cursor:pointer;transition:all 0.2s;text-align:center}
+  .preset:hover{border-color:var(--ink)}
+  .preset.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .preset-name{font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.2rem}
+  .preset-spec{font-size:0.55rem;color:var(--muted)}
+  .preset.active .preset-spec{color:rgba(245,242,237,0.5)}
+  .opts{display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.8rem;align-items:flex-end}
+  .opt{display:flex;flex-direction:column;gap:0.2rem}
+  .opt-label{font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)}
+  input[type=number],select{border:0.5px solid var(--subtle);background:var(--paper-dark);padding:0.4rem 0.6rem;font-size:0.7rem;font-family:inherit;color:var(--ink);outline:none;width:105px}
+  input[type=range]{width:100px;accent-color:var(--gold)}
+  input[type=text]{border:0.5px solid var(--subtle);background:var(--paper-dark);padding:0.4rem 0.6rem;font-size:0.72rem;font-family:inherit;color:var(--ink);outline:none;width:190px}
+  input[type=color]{width:34px;height:27px;border:0.5px solid var(--subtle);cursor:pointer;padding:2px}
+  .qv{font-size:0.7rem;color:var(--gold);font-weight:600;min-width:32px}
+  .wm-tabs{display:flex;gap:0;margin-bottom:0.8rem}
+  .wm-tab{font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.35rem 0.9rem;border:0.5px solid var(--subtle);background:var(--paper-dark);cursor:pointer;transition:all 0.2s}
+  .wm-tab.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .wm-panel{display:none}
+  .wm-panel.active{display:block}
+  .wm-row{display:flex;gap:0.8rem;align-items:flex-end;flex-wrap:wrap;margin-bottom:0.6rem}
+  .wm-drop{border:1px dashed var(--subtle);background:var(--paper-dark);padding:0.9rem;text-align:center;cursor:pointer;font-size:0.65rem;color:var(--muted);position:relative;transition:all 0.2s}
+  .wm-drop:hover{border-color:var(--gold)}
+  .wm-drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%}
+  .wm-prev-row{display:flex;align-items:center;gap:0.7rem;margin-top:0.5rem}
+  .wm-prev-row img{max-height:36px;max-width:100px;object-fit:contain}
+  .wm-prev-row span{font-size:0.6rem;color:var(--muted)}
+  .pos-presets{display:flex;gap:0.35rem;flex-wrap:wrap;margin-bottom:0.7rem}
+  .pos-btn{font-size:0.58rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.28rem 0.65rem;border:0.5px solid var(--subtle);background:var(--paper-dark);cursor:pointer;transition:all 0.2s}
+  .pos-btn:hover{border-color:var(--ink)}
+  .pos-btn.active{background:var(--gold);color:var(--paper);border-color:var(--gold)}
+  .preview-wrap{position:relative;display:inline-block;cursor:crosshair;user-select:none;border:0.5px solid var(--subtle);max-width:100%}
+  .preview-wrap img{display:block;max-width:100%;max-height:360px}
+  .wm-draggable{position:absolute;cursor:grab;user-select:none;line-height:1}
+  .wm-draggable:active{cursor:grabbing}
+  .wm-draggable img{display:block;pointer-events:none}
+  .preview-hint{font-size:0.58rem;color:var(--muted);margin-top:0.35rem;text-align:center}
+  .drop-zone{border:1px dashed var(--subtle);background:white;padding:2rem;text-align:center;cursor:pointer;transition:all 0.2s;position:relative;margin-bottom:1rem}
+  .drop-zone.dragover{border-color:var(--gold);background:var(--gold-pale)}
+  .drop-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+  .drop-icon{font-size:1.6rem;margin-bottom:0.35rem}
+  .drop-text{font-size:0.75rem;color:var(--muted)}
+  .drop-sub{font-size:0.6rem;color:rgba(14,13,12,0.28);margin-top:0.2rem}
+  .file-item{display:grid;grid-template-columns:52px 1fr auto auto;gap:0.7rem;align-items:center;padding:0.55rem 0.8rem;border-bottom:0.5px solid var(--subtle);background:white}
+  .file-item:first-child{border-top:0.5px solid var(--subtle)}
+  .file-thumb{width:52px;height:39px;object-fit:cover;background:var(--paper-dark);display:block}
+  .file-name{font-size:0.68rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:280px}
+  .file-meta{font-size:0.56rem;color:var(--muted);margin-top:0.1rem}
+  .f-badge{font-size:0.52rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.16rem 0.4rem}
+  .f-badge-pending{color:var(--muted);background:var(--paper-dark)}
+  .f-badge-processing{color:var(--gold);background:var(--gold-pale)}
+  .f-badge-done{color:#2d6a4f;background:#e8f5e9}
+  .dl-link{font-size:0.56rem;color:var(--gold);text-decoration:none;white-space:nowrap}
+  .dl-link:hover{text-decoration:underline}
+  .tog{display:flex;align-items:center;gap:0.45rem}
+  .tog input{cursor:pointer;accent-color:var(--gold)}
+  .tog label{font-size:0.67rem;color:var(--muted);cursor:pointer}
+  .actions{display:flex;gap:0.6rem;margin-top:1rem;flex-wrap:wrap}
+  .progress{height:2px;background:var(--subtle);display:none;margin-top:0.8rem}
+  .progress-bar{height:100%;background:var(--gold);transition:width 0.3s}
+  .summary{margin-top:0.8rem;font-size:0.67rem;color:var(--muted);line-height:1.8}
+  .tool-footer{margin-top:2rem;padding-top:1rem;border-top:0.5px solid var(--subtle);text-align:center}
+  .tool-footer p{font-size:0.6rem;color:var(--muted);line-height:1.8}
+  .tool-footer a{color:var(--gold);text-decoration:none}
+  .tool-footer a:hover{text-decoration:underline}
+  @media(max-width:800px){.ad-side{display:none}.presets{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:500px){.tool-wrap{padding:1rem}}
+</style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo__en">G · Ryu</span>
+      <span class="nav-logo__kr">류화정</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="works.html">Works</a></li>
+      <li><a href="commercial.html">Commercial</a></li>
+      <li><a href="https://www.saatchiart.com/en-kr/account/artworks/1065821" target="_blank" rel="noopener" class="nav-ext">Saatchi Art</a></li>
+      <li><a href="https://www.artsper.com/fr/artistes-contemporains/coree-du-sud/100353/gilbert-ryu" target="_blank" rel="noopener" class="nav-ext">Artsper</a></li>
+      <li><a href="#" class="nav-coming">Digital Goods</a></li>
+      <li><a href="#" class="nav-coming">나무의 기억</a></li>
+      <li><a href="artm.html" class="nav-artm">ART:M</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="resizer.html" class="active" style="color:var(--gold)">🛠 Resizer</a></li>
+    </ul>
+    <button class="nav-lang"><span>KR</span> / EN</button>
+    <button class="nav-hamburger" id="navHamburger" aria-label="메뉴">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="nav-drawer" id="navDrawer">
+    <a href="works.html">Works</a>
+    <a href="commercial.html">Commercial</a>
+    <a href="https://www.saatchiart.com/en-kr/account/artworks/1065821" target="_blank" rel="noopener" class="nav-ext">Saatchi Art</a>
+    <a href="https://www.artsper.com/fr/artistes-contemporains/coree-du-sud/100353/gilbert-ryu" target="_blank" rel="noopener" class="nav-ext">Artsper</a>
+    <a href="#" class="nav-coming">Digital Goods</a>
+    <a href="#" class="nav-coming">나무의 기억</a>
+    <a href="artm.html" class="nav-artm">ART:M</a>
+    <a href="news.html">News</a>
+    <a href="about.html">About</a>
+    <a href="resizer.html" style="color:var(--gold)">🛠 Resizer</a>
+    <button class="nav-drawer-lang"><span>KR</span> / EN</button>
+  </div>
+
+  <div class="page">
+  <div class="tool-wrap">
+
+    <!-- 상단 광고 -->
+    <div class="ad-slot ad-top">
+      Advertisement
+      <!-- 승인 후 교체:
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="horizontal" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+      -->
+    </div>
+
+    <div class="tool-header">
+      <h1>Image Resizer &amp; Watermark</h1>
+      <p>이미지 크기 최적화 + 내 서명·로고 워터마크 추가 — 완전 무료, 서버 업로드 없음</p>
+      <div class="tool-badges">
+        <span class="badge-item">✓ 서버 전송 없음</span>
+        <span class="badge-item">✓ 이미지 워터마크 무료</span>
+        <span class="badge-item">✓ 위치 드래그 지정</span>
+        <span class="badge-item">✓ 배치 처리</span>
+        <span class="badge-item">✓ 원본 비율 유지</span>
+      </div>
+    </div>
+
+    <div class="tool-layout">
+      <div class="tool-main">
+
+        <!-- ① 사이즈 -->
+        <div class="tc">
+          <div class="tc-title">① 사이즈 · 품질</div>
+          <div class="presets">
+            <div class="preset active" data-w="1600" data-q="85" onclick="selectPreset(this)"><div class="preset-name">Works</div><div class="preset-spec">1600px · 85%</div></div>
+            <div class="preset" data-w="1400" data-q="82" onclick="selectPreset(this)"><div class="preset-name">Commercial</div><div class="preset-spec">1400px · 82%</div></div>
+            <div class="preset" data-w="1920" data-q="88" onclick="selectPreset(this)"><div class="preset-name">Hero</div><div class="preset-spec">1920px · 88%</div></div>
+            <div class="preset" data-w="1080" data-q="85" onclick="selectPreset(this)"><div class="preset-name">SNS</div><div class="preset-spec">1080px · 85%</div></div>
+            <div class="preset" data-w="2048" data-q="90" onclick="selectPreset(this)"><div class="preset-name">Print</div><div class="preset-spec">2048px · 90%</div></div>
+            <div class="preset" data-w="800" data-q="80" onclick="selectPreset(this)"><div class="preset-name">Web</div><div class="preset-spec">800px · 80%</div></div>
+            <div class="preset" data-w="3000" data-q="90" onclick="selectPreset(this)"><div class="preset-name">Gallery</div><div class="preset-spec">3000px · 90%</div></div>
+            <div class="preset" data-w="0" data-q="80" onclick="selectPreset(this)"><div class="preset-name">Custom</div><div class="preset-spec">직접 설정</div></div>
+          </div>
+          <div class="opts">
+            <div class="opt"><span class="opt-label">최대 너비 (px)</span><input type="number" id="maxWidth" value="1600" min="100" max="8000" step="100"></div>
+            <div class="opt"><span class="opt-label">품질</span><div style="display:flex;align-items:center;gap:0.4rem"><input type="range" id="quality" min="60" max="95" value="85" oninput="document.getElementById('qv').textContent=this.value+'%'"><span class="qv" id="qv">85%</span></div></div>
+            <div class="opt"><span class="opt-label">형식</span><select id="format"><option value="jpeg">JPEG</option><option value="webp">WebP</option><option value="png">PNG</option></select></div>
+          </div>
+        </div>
+
+        <!-- ② 워터마크 -->
+        <div class="tc">
+          <div class="tc-title">② 워터마크</div>
+          <div class="tog" style="margin-bottom:0.8rem">
+            <input type="checkbox" id="useWm" checked onchange="document.getElementById('wmBody').style.opacity=this.checked?'1':'0.35';updatePreview()">
+            <label for="useWm">워터마크 사용</label>
+          </div>
+          <div id="wmBody">
+            <div class="wm-tabs">
+              <div class="wm-tab active" onclick="switchTab('text',this)">텍스트</div>
+              <div class="wm-tab" onclick="switchTab('image',this)">이미지 (로고·서명)</div>
+            </div>
+            <div class="wm-panel active" id="wm-text">
+              <div class="wm-row">
+                <div class="opt"><span class="opt-label">문구</span><input type="text" id="wmText" value="© G.Ryu" oninput="updatePreview()"></div>
+                <div class="opt"><span class="opt-label">크기</span><input type="number" id="wmFs" value="22" min="10" max="120" style="width:65px" oninput="updatePreview()"></div>
+                <div class="opt"><span class="opt-label">색상</span><input type="color" id="wmColor" value="#ffffff" oninput="updatePreview()"></div>
+                <div class="opt"><span class="opt-label">투명도</span><div style="display:flex;align-items:center;gap:0.4rem"><input type="range" id="wmOpa" min="5" max="80" value="30" oninput="document.getElementById('wmOpaV').textContent=this.value+'%';updatePreview()"><span class="qv" id="wmOpaV">30%</span></div></div>
+              </div>
+            </div>
+            <div class="wm-panel" id="wm-image">
+              <div class="wm-drop" id="wmDrop"><input type="file" id="wmFile" accept="image/*" onchange="loadWmImg(this)">🖼 로고 또는 서명 이미지 업로드<br><span style="font-size:0.56rem">PNG 투명배경 권장</span></div>
+              <div class="wm-prev-row" id="wmPrev" style="display:none"><img id="wmThumb" src=""><span id="wmFname"></span><button class="btn btn-line" style="padding:0.28rem 0.6rem;font-size:0.56rem" onclick="clearWmImg()">제거</button></div>
+              <div class="wm-row" style="margin-top:0.7rem">
+                <div class="opt"><span class="opt-label">크기 (너비의 %)</span><div style="display:flex;align-items:center;gap:0.4rem"><input type="range" id="wmSz" min="3" max="50" value="15" oninput="document.getElementById('wmSzV').textContent=this.value+'%';updatePreview()"><span class="qv" id="wmSzV">15%</span></div></div>
+                <div class="opt"><span class="opt-label">불투명도</span><div style="display:flex;align-items:center;gap:0.4rem"><input type="range" id="wmIOpa" min="5" max="100" value="70" oninput="document.getElementById('wmIOpaV').textContent=this.value+'%';updatePreview()"><span class="qv" id="wmIOpaV">70%</span></div></div>
+              </div>
+            </div>
+            <!-- 위치 -->
+            <div style="margin-top:0.8rem;padding-top:0.8rem;border-top:0.5px solid var(--subtle)">
+              <div class="opt-label" style="margin-bottom:0.5rem">워터마크 위치 — 프리셋 또는 미리보기에서 드래그</div>
+              <div class="pos-presets">
+                <div class="pos-btn" onclick="setPos('top-left',this)">좌상단</div>
+                <div class="pos-btn" onclick="setPos('top-right',this)">우상단</div>
+                <div class="pos-btn" onclick="setPos('center',this)">중앙</div>
+                <div class="pos-btn" onclick="setPos('bottom-left',this)">좌하단</div>
+                <div class="pos-btn active" onclick="setPos('bottom-right',this)">우하단</div>
+                <div class="pos-btn" id="customPosBtn" onclick="setPos('custom',this)">드래그 지정</div>
+              </div>
+              <div id="previewArea" style="display:none">
+                <div class="preview-wrap" id="previewWrap">
+                  <img id="previewImg" src="">
+                  <div class="wm-draggable" id="wmDrag"></div>
+                </div>
+                <div class="preview-hint">워터마크를 드래그해서 위치를 지정하세요</div>
+              </div>
+              <div id="noPreviewHint" style="font-size:0.6rem;color:var(--muted);margin-top:0.3rem">이미지를 선택하면 미리보기에서 드래그로 위치를 지정할 수 있습니다.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ③ 이미지 선택 -->
+        <div class="tc">
+          <div class="tc-title">③ 이미지 선택</div>
+          <div class="drop-zone" id="dropZone">
+            <input type="file" id="fileInput" multiple accept="image/*" onchange="handleFiles(this.files)">
+            <div class="drop-icon">🖼</div>
+            <div class="drop-text">이미지를 드래그하거나 클릭해서 선택</div>
+            <div class="drop-sub">JPG · PNG · WEBP · BMP · 여러 장 한번에 가능</div>
+          </div>
+          <div id="fileList"></div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-dark" id="processBtn" onclick="processAll()" disabled>변환 시작</button>
+          <button class="btn btn-line" id="dlAllBtn" onclick="downloadAll()" style="display:none">전체 다운로드</button>
+          <button class="btn btn-line" onclick="clearAll()">초기화</button>
+        </div>
+        <div class="progress" id="progress"><div class="progress-bar" id="progressBar" style="width:0%"></div></div>
+        <div class="summary" id="summary"></div>
+
+        <!-- 하단 광고 -->
+        <div class="ad-slot ad-bottom">
+          Advertisement
+          <!-- 승인 후 교체:
+          <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="horizontal" data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+          -->
+        </div>
+
+        <div class="tool-footer">
+          <p>이 도구는 브라우저에서만 동작하며 이미지가 서버로 전송되지 않습니다.<br>
+          Made by <a href="index.html">G.Ryu</a> &nbsp;·&nbsp; <a href="artm.html">ART:M 플랫폼 소식 받기</a></p>
+        </div>
+
+      </div>
+
+      <!-- 사이드 광고 -->
+      <div class="ad-side">
+        <div class="ad-slot" style="width:160px;height:600px;position:sticky;top:80px">
+          Ad
+          <!-- 승인 후 교체:
+          <ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX"></ins>
+          <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+          -->
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-logo">G · Ryu / 류화정</div>
+    <div class="footer-socials">
+      <a href="https://instagram.com/studio.gryu" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://threads.net/gilbert1737" target="_blank" rel="noopener">Threads</a>
+      <a href="https://facebook.com/G.Ryu1737" target="_blank" rel="noopener">Facebook</a>
+    </div>
+    <span class="footer-copy">© 2025 Hwajung Ryu. All Rights Reserved.</span>
+  </footer>
+
+<script>
+var files=[],results=[],wmImgEl=null,wmMode='text';
+var wmPosX=0.98,wmPosY=0.98,posMode='bottom-right';
+var previewImgEl=null;
+
+function selectPreset(el){document.querySelectorAll('.preset').forEach(function(p){p.classList.remove('active');});el.classList.add('active');var w=parseInt(el.dataset.w),q=parseInt(el.dataset.q);if(w>0)document.getElementById('maxWidth').value=w;document.getElementById('quality').value=q;document.getElementById('qv').textContent=q+'%';}
+function switchTab(mode,el){wmMode=mode;document.querySelectorAll('.wm-tab').forEach(function(t){t.classList.remove('active');});document.querySelectorAll('.wm-panel').forEach(function(p){p.classList.remove('active');});el.classList.add('active');document.getElementById('wm-'+mode).classList.add('active');updatePreview();}
+function loadWmImg(input){var f=input.files[0];if(!f)return;var url=URL.createObjectURL(f);wmImgEl=new Image();wmImgEl.onload=function(){document.getElementById('wmThumb').src=url;document.getElementById('wmFname').textContent=f.name;document.getElementById('wmPrev').style.display='flex';document.getElementById('wmDrop').style.display='none';updatePreview();};wmImgEl.src=url;}
+function clearWmImg(){wmImgEl=null;document.getElementById('wmFile').value='';document.getElementById('wmPrev').style.display='none';document.getElementById('wmDrop').style.display='block';updatePreview();}
+var posMap={'top-left':[0.02,0.02],'top-right':[0.98,0.02],'center':[0.5,0.5],'bottom-left':[0.02,0.98],'bottom-right':[0.98,0.98]};
+function setPos(name,el){posMode=name;document.querySelectorAll('.pos-btn').forEach(function(b){b.classList.remove('active');});el.classList.add('active');if(posMap[name]){wmPosX=posMap[name][0];wmPosY=posMap[name][1];}updatePreview();}
+function updatePreview(){var drag=document.getElementById('wmDrag'),wrap=document.getElementById('previewWrap'),useWm=document.getElementById('useWm').checked;if(!previewImgEl||!useWm){drag.style.display='none';return;}drag.style.display='block';drag.innerHTML='';var wrapW=wrap.clientWidth||400,wrapH=document.getElementById('previewImg').clientHeight||300;if(wmMode==='text'){var txt=document.getElementById('wmText').value||'© G.Ryu',fs=parseInt(document.getElementById('wmFs').value)||22,col=document.getElementById('wmColor').value,opa=parseInt(document.getElementById('wmOpa').value)/100;drag.style.cssText='position:absolute;cursor:grab;user-select:none;font-family:Georgia,serif;font-weight:300;font-size:'+fs+'px;color:'+col+';opacity:'+opa+';text-shadow:0 1px 3px rgba(0,0,0,0.4);white-space:nowrap;padding:2px';drag.textContent=txt;}else if(wmMode==='image'&&wmImgEl){var sz=parseInt(document.getElementById('wmSz').value)/100,io=parseInt(document.getElementById('wmIOpa').value)/100,ww=Math.round(wrapW*sz);drag.style.cssText='position:absolute;cursor:grab;user-select:none;opacity:'+io+';padding:2px';var img=document.createElement('img');img.src=wmImgEl.src;img.style.width=ww+'px';img.style.display='block';img.draggable=false;drag.appendChild(img);}else{drag.style.display='none';return;}setTimeout(function(){var dw=drag.offsetWidth,dh=drag.offsetHeight,x=Math.max(0,Math.min(wrapW-dw,Math.round(wmPosX*wrapW-dw*wmPosX))),y=Math.max(0,Math.min(wrapH-dh,Math.round(wmPosY*wrapH-dh*wmPosY)));drag.style.left=x+'px';drag.style.top=y+'px';},0);}
+(function(){var drag=document.getElementById('wmDrag'),isDragging=false,startX,startY,origLeft,origTop;drag.addEventListener('mousedown',function(e){if(e.button!==0)return;isDragging=true;startX=e.clientX;startY=e.clientY;origLeft=drag.offsetLeft;origTop=drag.offsetTop;drag.style.cursor='grabbing';e.preventDefault();});document.addEventListener('mousemove',function(e){if(!isDragging)return;var wrap=document.getElementById('previewWrap'),wrapW=wrap.clientWidth,wrapH=document.getElementById('previewImg').clientHeight,nx=Math.max(0,Math.min(wrapW-drag.offsetWidth,origLeft+(e.clientX-startX))),ny=Math.max(0,Math.min(wrapH-drag.offsetHeight,origTop+(e.clientY-startY)));drag.style.left=nx+'px';drag.style.top=ny+'px';wmPosX=(nx+drag.offsetWidth*0.5)/wrapW;wmPosY=(ny+drag.offsetHeight*0.5)/wrapH;posMode='custom';document.querySelectorAll('.pos-btn').forEach(function(b){b.classList.remove('active');});document.getElementById('customPosBtn').classList.add('active');});document.addEventListener('mouseup',function(){if(isDragging){isDragging=false;drag.style.cursor='grab';}});drag.addEventListener('touchstart',function(e){var t=e.touches[0];isDragging=true;startX=t.clientX;startY=t.clientY;origLeft=drag.offsetLeft;origTop=drag.offsetTop;e.preventDefault();},{passive:false});document.addEventListener('touchmove',function(e){if(!isDragging)return;var t=e.touches[0],wrap=document.getElementById('previewWrap'),wrapW=wrap.clientWidth,wrapH=document.getElementById('previewImg').clientHeight,nx=Math.max(0,Math.min(wrapW-drag.offsetWidth,origLeft+(t.clientX-startX))),ny=Math.max(0,Math.min(wrapH-drag.offsetHeight,origTop+(t.clientY-startY)));drag.style.left=nx+'px';drag.style.top=ny+'px';wmPosX=(nx+drag.offsetWidth*0.5)/wrapW;wmPosY=(ny+drag.offsetHeight*0.5)/wrapH;e.preventDefault();},{passive:false});document.addEventListener('touchend',function(){isDragging=false;});})();
+var dz=document.getElementById('dropZone');dz.addEventListener('dragover',function(e){e.preventDefault();dz.classList.add('dragover');});dz.addEventListener('dragleave',function(){dz.classList.remove('dragover');});dz.addEventListener('drop',function(e){e.preventDefault();dz.classList.remove('dragover');handleFiles(e.dataTransfer.files);});
+function handleFiles(fl){Array.from(fl).forEach(function(f){if(f.type.startsWith('image/'))files.push({file:f,status:'pending',result:null,preview:null});});renderList();document.getElementById('processBtn').disabled=files.length===0;if(files.length>0&&!previewImgEl)loadPreview(files[0].file);}
+function loadPreview(file){var url=URL.createObjectURL(file),img=document.getElementById('previewImg');previewImgEl=new Image();previewImgEl.onload=function(){img.src=url;img.style.maxWidth='100%';img.style.maxHeight='360px';img.style.display='block';document.getElementById('previewArea').style.display='block';document.getElementById('noPreviewHint').style.display='none';setTimeout(updatePreview,50);};previewImgEl.src=url;}
+function renderList(){var list=document.getElementById('fileList');if(!files.length){list.innerHTML='';return;}list.innerHTML=files.map(function(item,i){var meta=formatSize(item.file.size);if(item.result)meta+=' → '+formatSize(item.result.size);var dl=item.result?'<a class="dl-link" href="'+item.result.url+'" download="'+item.result.name+'">다운로드</a>':'';return '<div class="file-item"><img class="file-thumb" id="th-'+i+'" src=""><div><div class="file-name">'+item.file.name+'</div><div class="file-meta">'+meta+'</div></div><span class="f-badge f-badge-'+item.status+'">'+{pending:'대기',processing:'처리중',done:'완료'}[item.status]+'</span>'+dl+'</div>';}).join('');files.forEach(function(item,i){if(item.preview){var t=document.getElementById('th-'+i);if(t)t.src=item.preview;return;}var r=new FileReader();r.onload=function(e){item.preview=e.target.result;var t=document.getElementById('th-'+i);if(t)t.src=e.target.result;};r.readAsDataURL(item.file);});}
+async function processAll(){var btn=document.getElementById('processBtn');btn.disabled=true;document.getElementById('progress').style.display='block';document.getElementById('dlAllBtn').style.display='none';results=[];var maxW=parseInt(document.getElementById('maxWidth').value)||1600,q=parseInt(document.getElementById('quality').value)/100,fmt=document.getElementById('format').value,useWm=document.getElementById('useWm').checked,mime={jpeg:'image/jpeg',webp:'image/webp',png:'image/png'}[fmt],ext={jpeg:'jpg',webp:'webp',png:'png'}[fmt];for(var i=0;i<files.length;i++){files[i].status='processing';renderList();var r=await resizeOne(files[i].file,maxW,q,mime,ext,useWm);files[i].status='done';files[i].result=r;results.push(r);document.getElementById('progressBar').style.width=Math.round((i+1)/files.length*100)+'%';renderList();}var orig=files.reduce(function(s,f){return s+f.file.size;},0),next=results.reduce(function(s,r){return s+r.size;},0);document.getElementById('summary').innerHTML='✓ '+files.length+'장 완료 &nbsp;|&nbsp; '+formatSize(orig)+' → '+formatSize(next)+' &nbsp;<b>('+Math.round((1-next/orig)*100)+'% 감소)</b>';document.getElementById('dlAllBtn').style.display='';btn.disabled=false;}
+function resizeOne(file,maxW,quality,mime,ext,useWm){return new Promise(function(resolve){var img=new Image(),url=URL.createObjectURL(file);img.onload=function(){var w=img.width,h=img.height;if(maxW>0&&w>maxW){h=Math.round(h*maxW/w);w=maxW;}var canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;var ctx=canvas.getContext('2d');ctx.drawImage(img,0,0,w,h);if(useWm){if(wmMode==='text'){var txt=document.getElementById('wmText').value||'© G.Ryu',fs=parseInt(document.getElementById('wmFs').value)||22,col=document.getElementById('wmColor').value,opa=parseInt(document.getElementById('wmOpa').value)/100;ctx.save();ctx.globalAlpha=opa;ctx.fillStyle=col;ctx.font='300 '+fs+'px Georgia,serif';ctx.shadowColor='rgba(0,0,0,0.4)';ctx.shadowBlur=4;ctx.textBaseline='middle';ctx.textAlign='left';var tw=ctx.measureText(txt).width,th=fs,px=Math.max(4,Math.min(w-tw-4,Math.round(wmPosX*w-tw*wmPosX))),py=Math.max(4,Math.min(h-4,Math.round(wmPosY*h-th*(wmPosY-0.5))));ctx.fillText(txt,px,py);ctx.restore();}else if(wmMode==='image'&&wmImgEl){var sz=parseInt(document.getElementById('wmSz').value)/100,io=parseInt(document.getElementById('wmIOpa').value)/100,ww=Math.round(w*sz),wh=Math.round(ww*wmImgEl.height/wmImgEl.width),px2=Math.max(0,Math.min(w-ww,Math.round(wmPosX*w-ww*wmPosX))),py2=Math.max(0,Math.min(h-wh,Math.round(wmPosY*h-wh*wmPosY)));ctx.save();ctx.globalAlpha=io;ctx.drawImage(wmImgEl,px2,py2,ww,wh);ctx.restore();}}URL.revokeObjectURL(url);canvas.toBlob(function(blob){var base=file.name.replace(/\.[^.]+$/,'');resolve({url:URL.createObjectURL(blob),name:base+'_gryu.'+ext,size:blob.size});},mime,quality);};img.src=url;});}
+function downloadAll(){results.forEach(function(r,i){setTimeout(function(){var a=document.createElement('a');a.href=r.url;a.download=r.name;a.click();},i*400);});}
+function clearAll(){files=[];results=[];previewImgEl=null;['fileList','summary'].forEach(function(id){document.getElementById(id).innerHTML='';});document.getElementById('processBtn').disabled=true;document.getElementById('dlAllBtn').style.display='none';document.getElementById('progress').style.display='none';document.getElementById('progressBar').style.width='0%';document.getElementById('fileInput').value='';document.getElementById('previewArea').style.display='none';document.getElementById('noPreviewHint').style.display='block';document.getElementById('previewImg').src='';document.getElementById('wmDrag').style.display='none';}
+function formatSize(b){return b>1048576?(b/1048576).toFixed(1)+' MB':Math.round(b/1024)+' KB';}
+var hb=document.getElementById('navHamburger'),dr=document.getElementById('navDrawer');hb.addEventListener('click',function(){hb.classList.toggle('open');dr.classList.toggle('open');document.body.style.overflow=dr.classList.contains('open')?'hidden':'';});dr.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){hb.classList.remove('open');dr.classList.remove('open');document.body.style.overflow='';});});
+</script>
+</body>
+</html>
