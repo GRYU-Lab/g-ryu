@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>서명 만들기 — 무료 온라인 Signature Maker · G.Ryu Tools</title>
+  <meta name="description" content="무료 온라인 서명 만들기. 펜·붓·잉크 도구로 나만의 서명을 만들고 투명배경 PNG로 저장. 워터마크로 바로 활용 가능. 서버 전송 없음.">
+  <meta name="keywords" content="서명 만들기, 서명 생성기, signature maker, 온라인 서명, 전자서명, 투명배경 서명, 워터마크 서명">
+  <meta property="og:title" content="서명 만들기 — 무료 Signature Maker · G.Ryu Tools">
+  <meta property="og:description" content="펜·붓·잉크로 나만의 서명을 만들고 투명배경 PNG로 저장. 완전 무료, 서버 전송 없음.">
+  <meta property="og:url" content="https://g-ryu.com/signature.html">
+  <link rel="canonical" href="https://g-ryu.com/signature.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "G.Ryu Signature Maker",
+    "description": "무료 온라인 서명 만들기 도구. 펜·붓·잉크 도구, 투명배경 PNG 저장.",
+    "url": "https://g-ryu.com/signature.html",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" },
+    "author": { "@type": "Person", "name": "류화정", "url": "https://g-ryu.com" }
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2631497500021113" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .tool-wrap { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
+    .tool-header { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 0.5px solid var(--subtle); }
+    .tool-header h1 { font-family: var(--font-serif-en); font-size: 1.8rem; font-weight: 300; margin-bottom: 0.3rem; }
+    .tool-header p { font-size: 0.73rem; color: var(--muted); }
+    .tool-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.8rem; }
+    .badge-item { font-size: 0.56rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.6rem; background: var(--gold-pale); color: var(--gold); }
+
+    .ad-slot { background: var(--paper-dark); border: 0.5px solid var(--subtle); display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .ad-top { height: 90px; margin-bottom: 1.5rem; }
+    .ad-bottom { height: 90px; margin-top: 1.5rem; }
+
+    /* 캔버스 영역 */
+    .sig-wrap {
+      background: white;
+      border: 0.5px solid var(--subtle);
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sig-tc-title { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.8rem; padding-bottom: 0.4rem; border-bottom: 0.5px solid var(--subtle); }
+
+    #canvas-wrap {
+      position: relative;
+      border: 0.5px solid var(--subtle);
+      background: #0c0c0c;
+      cursor: crosshair;
+      margin-bottom: 1rem;
+    }
+    canvas { display: block; width: 100%; height: auto; }
+
+    /* 배경 토글 */
+    #bg-toggle { position: absolute; top: 10px; right: 10px; display: flex; gap: 6px; }
+    .bg-btn { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--subtle); cursor: pointer; transition: border-color 0.2s; }
+    .bg-btn.active { border-color: var(--gold); }
+    #bg-dark  { background: #0c0c0c; }
+    #bg-white { background: #ffffff; }
+    #bg-paper { background: var(--paper); }
+
+    /* 컨트롤 패널 */
+    .sig-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1rem; }
+    .sig-group { display: flex; flex-direction: column; gap: 0.7rem; }
+    .sig-label { font-size: 0.55rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+
+    /* 도구 버튼 */
+    .tool-row { display: flex; gap: 0.4rem; }
+    .tool-btn {
+      flex: 1; padding: 0.45rem 0.3rem;
+      background: var(--paper-dark); border: 0.5px solid var(--subtle);
+      color: var(--muted); font-size: 0.65rem; letter-spacing: 0.06em;
+      cursor: pointer; transition: all 0.15s; font-family: inherit; text-align: center;
+    }
+    .tool-btn:hover { border-color: var(--ink); color: var(--ink); }
+    .tool-btn.active { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+
+    /* 슬라이더 */
+    .slider-row { display: flex; align-items: center; gap: 0.8rem; }
+    input[type=range] { flex: 1; accent-color: var(--gold); height: 2px; }
+    .val-display { width: 28px; text-align: right; font-size: 0.7rem; color: var(--gold); font-weight: 600; }
+
+    /* 색상 팔레트 */
+    .color-row { display: flex; gap: 6px; flex-wrap: wrap; }
+    .color-swatch { width: 22px; height: 22px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: transform 0.15s, border-color 0.15s; }
+    .color-swatch:hover { transform: scale(1.15); }
+    .color-swatch.active { border-color: var(--ink); }
+
+    /* 버튼 */
+    .btn-row { display: flex; gap: 0.6rem; justify-content: flex-end; margin-bottom: 0.8rem; }
+
+    /* 다운로드 패널 */
+    #dl-panel { display: none; background: var(--paper-dark); border: 0.5px solid var(--subtle); padding: 1rem; margin-top: 0.5rem; flex-direction: column; gap: 0.8rem; }
+    #dl-panel.open { display: flex; }
+    .dl-label { font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem; }
+    .size-row { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .size-btn { padding: 0.3rem 0.8rem; background: var(--paper); border: 0.5px solid var(--subtle); color: var(--muted); font-size: 0.6rem; cursor: pointer; font-family: inherit; transition: all 0.15s; }
+    .size-btn:hover, .size-btn.active { border-color: var(--gold); color: var(--gold); }
+    .dl-row { display: flex; gap: 0.5rem; }
+    .dl-btn { flex: 1; padding: 0.6rem; background: transparent; border: 0.5px solid var(--subtle); color: var(--muted); font-size: 0.62rem; cursor: pointer; font-family: inherit; text-align: center; transition: all 0.15s; letter-spacing: 0.06em; }
+    .dl-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .dl-btn.primary { border-color: var(--ink); color: var(--ink); }
+    .dl-btn.primary:hover { background: var(--ink); color: var(--paper); }
+
+    .sig-tip { font-size: 0.65rem; color: var(--muted); text-align: center; margin-top: 0.5rem; }
+
+    /* Tools 링크 */
+    .tool-footer { margin-top: 2rem; padding-top: 1rem; border-top: 0.5px solid var(--subtle); text-align: center; }
+    .tool-footer p { font-size: 0.6rem; color: var(--muted); line-height: 1.8; }
+    .tool-footer a { color: var(--gold); text-decoration: none; }
+    .tool-footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      .sig-panel { grid-template-columns: 1fr; }
+      .tool-wrap { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo__en">G · Ryu</span>
+      <span class="nav-logo__kr">류화정</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="works.html">Works</a></li>
+      <li><a href="commercial.html">Commercial</a></li>
+      <li><a href="https://www.saatchiart.com/en-kr/account/artworks/1065821" target="_blank" rel="noopener" class="nav-ext">Saatchi Art</a></li>
+      <li><a href="https://www.artsper.com/fr/artistes-contemporains/coree-du-sud/100353/gilbert-ryu" target="_blank" rel="noopener" class="nav-ext">Artsper</a></li>
+      <li><a href="#" class="nav-coming">Digital Goods</a></li>
+      <li><a href="#" class="nav-coming">나무의 기억</a></li>
+      <li><a href="artm.html" class="nav-artm">ART:M</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="tools.html" class="active" style="color:var(--gold)">🛠 Tools</a></li>
+    </ul>
+    <button class="nav-lang"><span>KR</span> / EN</button>
+    <button class="nav-hamburger" id="navHamburger" aria-label="메뉴">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="nav-drawer" id="navDrawer">
+    <a href="works.html">Works</a>
+    <a href="commercial.html">Commercial</a>
+    <a href="https://www.saatchiart.com/en-kr/account/artworks/1065821" target="_blank" rel="noopener" class="nav-ext">Saatchi Art</a>
+    <a href="https://www.artsper.com/fr/artistes-contemporains/coree-du-sud/100353/gilbert-ryu" target="_blank" rel="noopener" class="nav-ext">Artsper</a>
+    <a href="#" class="nav-coming">Digital Goods</a>
+    <a href="#" class="nav-coming">나무의 기억</a>
+    <a href="artm.html" class="nav-artm">ART:M</a>
+    <a href="news.html">News</a>
+    <a href="about.html">About</a>
+    <a href="tools.html" style="color:var(--gold)">🛠 Tools</a>
+    <button class="nav-drawer-lang"><span>KR</span> / EN</button>
+  </div>
+
+  <div class="page">
+  <div class="tool-wrap">
+
+    <!-- 상단 광고 -->
+    <div class="ad-slot ad-top">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2631497500021113" data-ad-slot="auto" data-ad-format="horizontal" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <div class="tool-header">
+      <p style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem">
+        <a href="tools.html" style="color:var(--muted);text-decoration:none">🛠 Tools</a> · Signature Maker
+      </p>
+      <h1>Signature Maker</h1>
+      <p>나만의 서명을 만들고 투명배경 PNG로 저장 — 워터마크로 바로 활용 가능</p>
+      <div class="tool-badges">
+        <span class="badge-item">✓ 서버 전송 없음</span>
+        <span class="badge-item">✓ 투명배경 PNG</span>
+        <span class="badge-item">✓ 펜·붓·잉크 3가지 도구</span>
+        <span class="badge-item">✓ 압력 감도</span>
+        <span class="badge-item">✓ 완전 무료</span>
+      </div>
+    </div>
+
+    <!-- 서명 도구 -->
+    <div class="sig-wrap">
+      <div class="sig-tc-title">① 서명 그리기</div>
+
+      <div id="canvas-wrap">
+        <canvas id="cvs" width="640" height="280"></canvas>
+        <div id="bg-toggle">
+          <div class="bg-btn active" id="bg-dark"  title="Dark"  onclick="setBg('#0c0c0c',this)"></div>
+          <div class="bg-btn"        id="bg-white" title="White" onclick="setBg('#ffffff',this)"></div>
+          <div class="bg-btn"        id="bg-paper" title="Paper" onclick="setBg('#f5f2ed',this)"></div>
+        </div>
+      </div>
+
+      <div class="sig-panel">
+        <!-- 왼쪽: 도구 + 색상 -->
+        <div class="sig-group">
+          <div class="sig-label">도구</div>
+          <div class="tool-row">
+            <div class="tool-btn active" id="tool-pen"    onclick="setTool('pen',this)">🖊 펜</div>
+            <div class="tool-btn"        id="tool-brush"  onclick="setTool('brush',this)">🖌 붓</div>
+            <div class="tool-btn"        id="tool-ink"    onclick="setTool('ink',this)">✒ 잉크</div>
+            <div class="tool-btn"        id="tool-eraser" onclick="setTool('eraser',this)">◻ 지우개</div>
+          </div>
+          <div class="sig-label" style="margin-top:0.4rem">색상</div>
+          <div class="color-row" id="colorRow"></div>
+        </div>
+
+        <!-- 오른쪽: 슬라이더 -->
+        <div class="sig-group">
+          <div class="sig-label">두께</div>
+          <div class="slider-row">
+            <input type="range" id="sizeSl" min="1" max="40" value="4" oninput="updateSize(this.value)">
+            <span class="val-display" id="sizeVal">4</span>
+          </div>
+          <div class="sig-label">부드러움</div>
+          <div class="slider-row">
+            <input type="range" id="smoothSl" min="0" max="10" value="5" oninput="smoothing=+this.value;document.getElementById('smoothVal').textContent=this.value">
+            <span class="val-display" id="smoothVal">5</span>
+          </div>
+          <div class="sig-label">불투명도</div>
+          <div class="slider-row">
+            <input type="range" id="opacitySl" min="10" max="100" value="90" oninput="opacity=+this.value/100;document.getElementById('opacityVal').textContent=this.value">
+            <span class="val-display" id="opacityVal">90</span>
+          </div>
+          <div class="sig-label">압력 감도 (속도→굵기)</div>
+          <div class="slider-row">
+            <input type="range" id="pressureSl" min="0" max="10" value="5" oninput="pressureSens=+this.value;document.getElementById('pressureVal').textContent=this.value">
+            <span class="val-display" id="pressureVal">5</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-line" onclick="clearCanvas()">지우기</button>
+        <button class="btn btn-line" onclick="undo()">되돌리기</button>
+        <button class="btn btn-dark" onclick="toggleDl()">저장 ▾</button>
+      </div>
+
+      <div id="dl-panel">
+        <div>
+          <div class="dl-label">해상도</div>
+          <div class="size-row">
+            <button class="size-btn active" onclick="setScale(1,this)">원본 (640×280)</button>
+            <button class="size-btn" onclick="setScale(2,this)">2× (1280×560)</button>
+            <button class="size-btn" onclick="setScale(3,this)">3× (1920×840)</button>
+            <button class="size-btn" onclick="setScale(4,this)">4× (2560×1120)</button>
+          </div>
+        </div>
+        <div class="dl-row">
+          <button class="dl-btn primary" onclick="download('png-transparent')">PNG (투명배경) ★</button>
+          <button class="dl-btn" onclick="download('png-bg')">PNG (현재배경)</button>
+        </div>
+        <p style="font-size:0.6rem;color:var(--muted)">💡 투명배경 PNG를 저장하면 <a href="resizer.html" style="color:var(--gold)">Image Resizer</a>에서 워터마크로 바로 사용할 수 있습니다.</p>
+      </div>
+
+      <p class="sig-tip" id="sigTip">마우스를 드래그하거나 터치해서 서명하세요</p>
+    </div>
+
+    <!-- 하단 광고 -->
+    <div class="ad-slot ad-bottom">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2631497500021113" data-ad-slot="auto" data-ad-format="horizontal" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <div class="tool-footer">
+      <p>이 도구는 브라우저에서만 동작하며 서명이 서버로 전송되지 않습니다.<br>
+      <a href="tools.html">← G.Ryu Tools</a> &nbsp;·&nbsp;
+      <a href="resizer.html">Image Resizer</a> &nbsp;·&nbsp;
+      <a href="artm.html">ART:M 소식 받기</a></p>
+    </div>
+
+  </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-logo">G · Ryu / 류화정</div>
+    <div class="footer-socials">
+      <a href="https://instagram.com/studio.gryu" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://threads.net/gilbert1737" target="_blank" rel="noopener">Threads</a>
+      <a href="https://facebook.com/G.Ryu1737" target="_blank" rel="noopener">Facebook</a>
+    </div>
+    <span class="footer-copy">© 2025 Hwajung Ryu. All Rights Reserved.</span>
+  </footer>
+
+<script>
+const cvs = document.getElementById('cvs');
+const ctx = cvs.getContext('2d');
+let tool='pen', color='#c9a96e', baseSize=4, smoothing=5, opacity=0.9, pressureSens=5;
+let bgColor='#0c0c0c', dlScale=1;
+let drawing=false, pts=[], lastPt=null, lastTime=Date.now(), history=[];
+
+ctx.fillStyle = bgColor;
+ctx.fillRect(0,0,cvs.width,cvs.height);
+
+/* 색상 팔레트 */
+const palette=['#c9a96e','#e8e2d9','#ffffff','#f0c060','#7ab8d4','#a0c878','#e07070','#c070c0','#000000','#222222','#555555','#888888'];
+const colorRow=document.getElementById('colorRow');
+palette.forEach(function(c){
+  const sw=document.createElement('div');
+  sw.className='color-swatch'+(c===color?' active':'');
+  sw.style.background=c;
+  sw.style.border=(c==='#ffffff'||c==='#e8e2d9')?'2px solid #ccc':'2px solid transparent';
+  sw.onclick=function(){
+    document.querySelectorAll('.color-swatch').forEach(function(s){s.classList.remove('active');});
+    sw.classList.add('active');
+    color=c;
+    if(tool==='eraser')setTool('pen',document.getElementById('tool-pen'));
+  };
+  colorRow.appendChild(sw);
+});
+
+function setTool(t,el){tool=t;document.querySelectorAll('.tool-btn').forEach(function(b){b.classList.remove('active');});el.classList.add('active');updateSize(document.getElementById('sizeSl').value);}
+function updateSize(v){baseSize=+v;document.getElementById('sizeVal').textContent=v;}
+function setBg(c,el){bgColor=c;document.querySelectorAll('.bg-btn').forEach(function(b){b.classList.remove('active');});el.classList.add('active');redrawAll();}
+function dist(a,b){return Math.sqrt((a.x-b.x)**2+(a.y-b.y)**2);}
+function getPressure(speed){if(pressureSens===0)return 1;const norm=Math.min(speed/20,1);return 1-norm*(pressureSens/10)*0.7;}
+
+function strokeLine(p1,p2,pressure){
+  const sz=baseSize*pressure;
+  if(tool==='eraser'){
+    ctx.globalCompositeOperation='destination-out';
+    ctx.lineWidth=sz*3;ctx.strokeStyle='rgba(0,0,0,1)';ctx.lineCap='round';ctx.lineJoin='round';
+    ctx.beginPath();ctx.moveTo(p1.x,p1.y);ctx.lineTo(p2.x,p2.y);ctx.stroke();
+    ctx.globalCompositeOperation='source-over';return;
+  }
+  ctx.globalAlpha=opacity;ctx.lineCap='round';ctx.lineJoin='round';
+  if(tool==='pen'){
+    ctx.lineWidth=sz;ctx.strokeStyle=color;ctx.shadowBlur=0;
+    ctx.beginPath();ctx.moveTo(p1.x,p1.y);ctx.lineTo(p2.x,p2.y);ctx.stroke();
+  } else if(tool==='brush'){
+    const steps=Math.max(2,Math.floor(dist(p1,p2)));
+    for(let i=0;i<steps;i++){
+      const t=i/steps,x=p1.x+(p2.x-p1.x)*t,y=p1.y+(p2.y-p1.y)*t;
+      const r=sz*(0.5+Math.random()*0.6);
+      ctx.globalAlpha=opacity*0.18;ctx.fillStyle=color;
+      ctx.beginPath();ctx.ellipse(x,y,r,r*0.6,Math.atan2(p2.y-p1.y,p2.x-p1.x),0,Math.PI*2);ctx.fill();
+    }
+  } else if(tool==='ink'){
+    ctx.lineWidth=sz;ctx.strokeStyle=color;ctx.shadowColor=color;ctx.shadowBlur=sz*0.8;
+    ctx.beginPath();ctx.moveTo(p1.x,p1.y);ctx.lineTo(p2.x,p2.y);ctx.stroke();
+    ctx.shadowBlur=0;ctx.globalAlpha=opacity*0.9;ctx.lineWidth=sz*0.3;ctx.strokeStyle='#ffffff';
+    ctx.beginPath();ctx.moveTo(p1.x,p1.y);ctx.lineTo(p2.x,p2.y);ctx.stroke();
+  }
+  ctx.globalAlpha=1;
+}
+
+function getPos(e){
+  const r=cvs.getBoundingClientRect(),scaleX=cvs.width/r.width,scaleY=cvs.height/r.height;
+  if(e.touches)return{x:(e.touches[0].clientX-r.left)*scaleX,y:(e.touches[0].clientY-r.top)*scaleY};
+  return{x:(e.clientX-r.left)*scaleX,y:(e.clientY-r.top)*scaleY};
+}
+function startDraw(e){
+  e.preventDefault();drawing=true;const p=getPos(e);pts=[p];lastPt=p;lastTime=Date.now();
+  history.push(ctx.getImageData(0,0,cvs.width,cvs.height));
+  if(history.length>30)history.shift();
+  document.getElementById('sigTip').style.display='none';
+}
+function draw(e){
+  e.preventDefault();if(!drawing)return;
+  const p=getPos(e),now=Date.now(),dt=Math.max(1,now-lastTime);
+  const speed=dist(p,lastPt)/dt*10,pressure=getPressure(speed);
+  const sm=smoothing/10,sp={x:lastPt.x+(p.x-lastPt.x)*(1-sm),y:lastPt.y+(p.y-lastPt.y)*(1-sm)};
+  strokeLine(lastPt,sp,pressure);lastPt=sp;lastTime=now;pts.push(sp);
+}
+function endDraw(){drawing=false;}
+
+cvs.addEventListener('mousedown',startDraw);cvs.addEventListener('mousemove',draw);
+cvs.addEventListener('mouseup',endDraw);cvs.addEventListener('mouseleave',endDraw);
+cvs.addEventListener('touchstart',startDraw,{passive:false});
+cvs.addEventListener('touchmove',draw,{passive:false});
+cvs.addEventListener('touchend',endDraw);
+
+function clearCanvas(){history.push(ctx.getImageData(0,0,cvs.width,cvs.height));ctx.fillStyle=bgColor;ctx.fillRect(0,0,cvs.width,cvs.height);}
+function undo(){if(history.length===0)return;ctx.putImageData(history.pop(),0,0);}
+function redrawAll(){const img=ctx.getImageData(0,0,cvs.width,cvs.height);ctx.fillStyle=bgColor;ctx.fillRect(0,0,cvs.width,cvs.height);ctx.putImageData(img,0,0);}
+function toggleDl(){document.getElementById('dl-panel').classList.toggle('open');}
+function setScale(s,el){dlScale=s;document.querySelectorAll('.size-btn').forEach(function(b){b.classList.remove('active');});el.classList.add('active');}
+
+function download(type){
+  const w=cvs.width*dlScale,h=cvs.height*dlScale;
+  const off=document.createElement('canvas');off.width=w;off.height=h;
+  const octx=off.getContext('2d');octx.imageSmoothingEnabled=true;octx.imageSmoothingQuality='high';
+  if(type==='png-transparent'){
+    octx.drawImage(cvs,0,0,w,h);
+    const id=octx.getImageData(0,0,w,h),d=id.data;
+    const br=parseInt(bgColor.slice(1,3),16),bg=parseInt(bgColor.slice(3,5),16),bb=parseInt(bgColor.slice(5,7),16);
+    for(let i=0;i<d.length;i+=4){
+      const diff=Math.abs(d[i]-br)+Math.abs(d[i+1]-bg)+Math.abs(d[i+2]-bb);
+      if(diff<30)d[i+3]=0;else if(diff<60)d[i+3]=Math.round((diff-30)/30*255);
+    }
+    octx.putImageData(id,0,0);save(off,'signature_transparent.png');
+  } else {
+    octx.fillStyle=bgColor;octx.fillRect(0,0,w,h);octx.drawImage(cvs,0,0,w,h);save(off,'signature.png');
+  }
+}
+function save(c,filename){const a=document.createElement('a');a.href=c.toDataURL('image/png');a.download=filename;a.click();}
+
+/* 햄버거 */
+var hb=document.getElementById('navHamburger'),dr=document.getElementById('navDrawer');
+hb.addEventListener('click',function(){hb.classList.toggle('open');dr.classList.toggle('open');document.body.style.overflow=dr.classList.contains('open')?'hidden':'';});
+dr.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){hb.classList.remove('open');dr.classList.remove('open');document.body.style.overflow='';});});
+</script>
+</body>
+</html>
