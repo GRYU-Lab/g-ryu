@@ -1,0 +1,94 @@
+{
+  "categories": [
+    {
+      "id": "event",
+      "label": "Event",
+      "label_kr": "행사",
+      "desc": "각종 행사 및 이벤트 현장 촬영.",
+      "works": []
+    },
+    {
+      "id": "concert",
+      "label": "Concert",
+      "label_kr": "공연",
+      "desc": "음악 공연의 생동감 있는 순간을 담은 공연 촬영.",
+      "works": [
+        {
+          "id": 1,
+          "title": "Muses",
+          "client": "Muses",
+          "year": "",
+          "image": "images/commercial/concert-muses-001.jpg"
+        },
+        {
+          "id": 2,
+          "title": "코리아챔버앙상블 콘서트",
+          "client": "Korea Chamber Ensemble",
+          "year": "",
+          "image": "images/commercial/concert-kce-001.jpg"
+        },
+        {
+          "id": 3,
+          "title": "Footstep on the water",
+          "client": "Footstep on the water",
+          "year": "",
+          "image": "images/commercial/concert-footstep-001.jpg"
+        },
+        {
+          "id": 4,
+          "title": "루미너리",
+          "client": "루미너리",
+          "year": "",
+          "image": "images/commercial/concert-luminary-001.jpg"
+        },
+        {
+          "id": 5,
+          "title": "김용선",
+          "client": "김용선",
+          "year": "",
+          "image": "images/commercial/concert-kimyongsun-001.jpg"
+        }
+      ]
+    },
+    {
+      "id": "profile",
+      "label": "Profile",
+      "label_kr": "프로필",
+      "desc": "아티스트·뮤지션의 개성과 감성을 담은 프로필 촬영.",
+      "works": [
+        {
+          "id": 1,
+          "title": "레트로트왱",
+          "client": "레트로트왱",
+          "year": "",
+          "image": "images/commercial/profile-retrotwaeng-001.jpg"
+        },
+        {
+          "id": 2,
+          "title": "코리아챔버앙상블",
+          "client": "Korea Chamber Ensemble",
+          "year": "",
+          "image": "images/commercial/profile-kce-001.jpg"
+        }
+      ]
+    },
+    {
+      "id": "honeymoon",
+      "label": "Honeymoon Snap",
+      "label_kr": "허니문",
+      "desc": "여행지의 자연스러운 순간을 담은 허니문 스냅 촬영.",
+      "works": []
+    },
+    {
+      "id": "wedding",
+      "label": "Wedding",
+      "label_kr": "웨딩 본식",
+      "desc": "소중한 결혼식의 순간을 기록하는 본식 촬영.",
+      "works": []
+    }
+  ],
+  "contact": {
+    "email": "studio.gryu@gmail.com",
+    "instagram": "https://instagram.com/studio.gryu"
+  }
+}
